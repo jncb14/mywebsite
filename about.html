@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - GB Construction Company Limited</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #000;
+      background: #fff;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #000;
+      flex-shrink: 0;
+    }
+    .brand { display: flex; align-items: center; gap: 0.8rem; }
+    .logo img { height: 50px; width: auto; }
+    header h1 { font-size: 1.6rem; line-height: 1.2; color: #000; font-weight: 700; }
+    nav { display: flex; }
+    nav a {
+      color: #000;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover { color: #555; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -5px; left: 0;
+      background-color: #000;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      background: url('images/PAP.jpg') no-repeat center center/cover;
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+
+    /* ABOUT CONTAINER */
+    .about-container {
+      position: relative;
+      max-width: 1200px;
+      width: 100%;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid #000;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+      color: #000;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+    }
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .right-column {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 1.5rem;
+    }
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* INFO CARDS */
+    .info-card {
+      background: #f4f4f4;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000;
+      text-align: justify;
+    }
+    .info-card h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    /* VALUES */
+    .values-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .value-card {
+      background: #e8e8e8;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #000;
+    }
+    .value-card h4 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* PEOPLE INFO (company-info style) */
+    .person-info {
+      background: #f4f4f4;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000;
+    }
+    .person-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #000;
+      text-align: center;
+      font-weight: 600;
+    }
+    .info-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-label { font-weight: 700; margin-bottom: 0.5rem; display: block; }
+
+    /* CERTIFICATE SLIDER */
+    .certificate-slider {
+      position: relative;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000;
+    }
+    .certificate-slide { display: none; }
+    .certificate-slide.active { display: block; }
+    .certificate-slide p {
+      margin-bottom: 1rem;
+      font-weight: bold;
+      color: #000;
+    }
+    .view-btn {
+      padding: 0.4rem 1rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+    .view-btn:hover { background: #444; }
+    .nav-arrows {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    .arrow-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .slide-indicator { font-size: 0.9rem; }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .modal-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      border: 2px solid #fff;
+      transition: transform 0.3s ease;
+    }
+    .close-btn {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #000;
+      color: #fff;
+      border: none;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 35px; height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rotate-btn {
+      margin-top: 1rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .rotate-btn:hover { background: #444; }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      padding: 1rem;
+      text-align: center;
+      color: #fff;
+      border-top: 2px solid #000;
+      flex-shrink: 0;
+    }
+    footer p { font-size: 0.85rem; margin-bottom: 0.5rem; }
+    footer .social-icons { margin-top: 0.5rem; }
+    footer .social-icons a {
+      color: #fff;
+      font-size: 1.2rem;
+      margin: 0 0.8rem;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 900px) {
+      .about-container { grid-template-columns: 1fr; padding: 1.5rem; }
+      .top-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; padding: 0.8rem 1rem; }
+      nav { margin-top: 10px; flex-direction: column; align-items: flex-start; }
+      nav a { margin: 5px 0; }
+      header h1 { font-size: 1.3rem; }
+      .about-container { padding: 1.2rem; margin: 0 0.5rem; max-width: 95%; }
+      .info-card, .person-info, .certificate-slider { padding: 1rem; }
+    }
+      .profile-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #000;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <img src="images/logo.png" alt="GB Construction Company Limited Logo">
+      </div>
+      <h1>GB Construction <br> Company Limited</h1>
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="about.html" style="font-weight:700;">ABOUT</a>
+      <a href="project.html">PROJECT</a>
+      <a href="contact.html">CONTACT</a>
+      <a href="services.html">SERVICES</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="about-container">
+      <!-- Left column -->
+      <div class="left-column">
+        <div class="info-card">
+          <h3>Overview</h3>
+          <p>GB Construction Company Limited acts as a Main Contractor specializing in commercial, residential, and infrastructure construction projects. With years of experience in the industry, we have built a reputation for quality workmanship, timely delivery, and exceptional customer service.</p>
+          <p>Our team of skilled professionals is dedicated to transforming your vision into reality, ensuring every project meets the highest standards of safety and quality. We take pride in our ability to handle projects of varying scales and complexities, from small renovations to large-scale developments.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Mission</h3>
+          <p>Our mission is to serve our customers with excellence and exceed their expectations through innovative construction solutions, superior craftsmanship, and unwavering commitment to quality.</p>
+          <p>We strive to build lasting relationships with our clients by delivering projects on time and within budget while maintaining the highest standards of safety and professionalism.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Values</h3>
+          <div class="values-grid">
+            <div class="value-card">
+              <h4>Truth and Honesty</h4>
+              <p>We act with authenticity and integrity, true to ourselves, customers, partners, and employees. These values ensure long-term success and resilience.</p>
+            </div>
+            <div class="value-card">
+              <h4>Trust and Empowerment</h4>
+              <p>We honor trust in people, partners, and employees, empowering management and executives to build solid business and strong relationships.</p>
+            </div>
+            <div class="value-card">
+              <h4>Commitment and Responsibility</h4>
+              <p>Since inception, we commit to our country, community, and business. Dedicated people strengthen our growth daily.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="right-column">
+        <div class="top-grid">
+          <!-- Noel -->
+          <div class="person-info">
+            <img src="images/profile1.png" class="profile-img">
+            <h3>GENERAL MANAGER</h3>
+            <div class="info-item">
+              <span class="info-label">NAME:</span>
+              <span>MR. NOEL P. BARON</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">YEARS OF EXPERIENCE:</span>
+              <span>15 YEARS</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">EDUCATION:</span>
+              <span>BS CIVIL ENGINEERING</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">PROPOSED DESIGNATION:</span>
+              <span>GENERAL MANAGER</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RELEVANT EXPERIENCE:</span>
+              <span>BUILDING CONSTRUCTION</span>
+            </div>
+          </div>
+
+          <!-- Mickey -->
+          <div class="person-info">
+            <img src="images/profile2.png" class="profile-img">
+            <h3>ADMIN MANAGER</h3>
+            <div class="info-item">
+              <span class="info-label">NAME:</span>
+              <span>MR. MICKEY KAUGA</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">YEARS OF EXPERIENCE:</span>
+              <span>5 YEARS</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">EDUCATION:</span>
+              <span>BS B.A</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">PROPOSED DESIGNATION:</span>
+              <span>ADMIN MANAGER</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RELEVANT EXPERIENCE:</span>
+              <span>CONSTRUCTION MANAGEMENT</span>
+            </div>
+          </div>
+
+          <!-- Ronnie -->
+          <div class="person-info">
+            <img src="images/profile3.png" class="profile-img">
+            <h3>PROJECT MANAGER</h3>
+            <div class="info-item">
+              <span class="info-label">NAME:</span>
+              <span>MR. RONNIE ANDRADE</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">YEARS OF EXPERIENCE:</span>
+              <span>15 YEARS</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">EDUCATION:</span>
+              <span>PROJECT MANAGER</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">PROPOSED DESIGNATION:</span>
+              <span>PROJECT MANAGER</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RELEVANT EXPERIENCE:</span>
+              <span>BUILDING CONSTRUCTION</span>
+            </div>
+          </div>
+
+          <!-- Edwin -->
+          <div class="person-info">
+            <img src="images/profile4.png" class="profile-img">
+            <h3>SITE SUPERVISOR</h3>
+            <div class="info-item">
+              <span class="info-label">NAME:</span>
+              <span>MR. EDWIN CALIMOSO</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">YEARS OF EXPERIENCE:</span>
+              <span>10 YEARS</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">EDUCATION:</span>
+              <span>PROJECT SUPERVISOR</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">PROPOSED DESIGNATION:</span>
+              <span>SITE SUPERVISOR</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">RELEVANT EXPERIENCE:</span>
+              <span>BUILDING CONSTRUCTION</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates Slider -->
+        <div class="certificate-slider">
+          <div class="certificate-slide active">
+            <p>CERTIFICATE OF INCORPORATION</p>
+            <button class="view-btn" data-img="images/certificate1.png">View</button>
+          </div>
+          <div class="certificate-slide">
+            <p>CERTIFICATE OF COMPLIANCE</p>
+            <button class="view-btn" data-img="images/certificate2.png">View</button>
+          </div>
+          <div class="certificate-slide">
+            <p>TP REGISTRATION CERTIFICATE</p>
+            <button class="view-btn" data-img="images/certificate3.png">View</button>
+          </div>
+
+          <div class="nav-arrows">
+            <button class="arrow-btn" id="prevSlide">&#8592;</button>
+            <span class="slide-indicator" id="slideIndicator">1 / 3</span>
+            <button class="arrow-btn" id="nextSlide">&#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="imgModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <img src="" alt="Full Certificate" id="modalImage">
+      <button class="rotate-btn" id="rotateBtn">Rotate</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    /* SLIDER */
+    const slides = document.querySelectorAll(".certificate-slide");
+    const indicator = document.getElementById("slideIndicator");
+    let current = 0;
+
+    function showSlide(i) {
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      indicator.textContent = `${i+1} / ${slides.length}`;
+    }
+
+    document.getElementById("prevSlide").addEventListener("click", () => {
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    });
+    document.getElementById("nextSlide").addEventListener("click", () => {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    });
+
+    /* MODAL WITH ROTATE */
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.getElementById("closeModal");
+    const rotateBtn = document.getElementById("rotateBtn");
+    let rotation = 0;
+
+    document.querySelectorAll(".view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = btn.dataset.img;
+        rotation = 0;
+        modalImg.style.transform = `rotate(${rotation}deg)`;
+      });
+    });
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+
+
+    rotateBtn.addEventListener("click", () => {
+      rotation = (rotation + 90) % 360;
+      modalImg.style.transform = `rotate(${rotation}deg)`;
+    });
+
+    showSlide(current);
+  </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - GB Construction Company Limited</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* === BLACK & WHITE THEME === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #000; /* BLACK TEXT */
+      background: #fff; /* WHITE BACKGROUND */
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff; /* WHITE BACKGROUND */
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #000; /* BLACK BORDER */
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      line-height: 1.2;
+      color: #000; /* BLACK TEXT */
+      font-weight: 700;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      display: flex;
+    }
+
+    nav a {
+      color: #000; /* BLACK TEXT */
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #555; /* DARK GRAY ON HOVER */
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #000; /* BLACK UNDERLINE */
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      background: url('images/PAP.jpg') no-repeat center center/cover;
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); /* DARK OVERLAY */
+    }
+
+    /* ===== CONTACT CONTAINER ===== */
+    .contact-container {
+      position: relative;
+      max-width: 1000px;
+      width: 100%;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.85); /* WHITE BACKGROUND WITH TRANSPARENCY */
+      border: 2px solid #000; /* BLACK BORDER */
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+      color: #000; /* BLACK TEXT */
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-container h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #000; /* BLACK TEXT */
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+
+    /* ===== COMPANY INFO SECTION ===== */
+    .company-info {
+      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000; /* BLACK BORDER */
+    }
+
+    .company-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #000; /* BLACK TEXT */
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .info-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .info-content {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .info-content i {
+      color: #000; /* BLACK ICONS */
+      font-size: 1.2rem;
+      width: 20px;
+    }
+
+    .info-content a {
+      color: #000; /* BLACK TEXT */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .info-content a:hover {
+      color: #555; /* DARK GRAY ON HOVER */
+    }
+
+    /* ===== MAP SECTION ===== */
+    .map-section {
+      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000; /* BLACK BORDER */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #000; /* BLACK TEXT */
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .map-placeholder {
+      flex: 1;
+      background: #ddd;
+      border: 1px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      min-height: 200px;
+    }
+
+    /* ===== EMAIL INQUIRY SECTION ===== */
+    .email-inquiry {
+      grid-column: 1 / -1;
+      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #000; /* BLACK BORDER */
+      text-align: center;
+    }
+
+    .email-inquiry h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #000; /* BLACK TEXT */
+      font-weight: 600;
+    }
+
+    .inquiry-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.9rem 1.7rem;
+      background: #000; /* BLACK BACKGROUND */
+      color: #fff; /* WHITE TEXT */
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .inquiry-button:hover {
+      background: #333; /* DARK GRAY ON HOVER */
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #000; /* BLACK BACKGROUND */
+      padding: 1rem;
+      text-align: center;
+      color: #fff; /* WHITE TEXT */
+      border-top: 2px solid #000;
+      flex-shrink: 0;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    footer .social-icons {
+      margin-top: 0.5rem;
+    }
+
+    footer .social-icons a {
+      color: #fff; /* WHITE ICONS */
+      font-size: 1.2rem;
+      margin: 0 0.8rem;
+      transition: color 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+      color: #aaa; /* LIGHT GRAY ON HOVER */
+    }
+
+    /* ===== MEDIA QUERIES ===== */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem 1rem;
+      }
+      nav {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a {
+        margin: 5px 0;
+      }
+      header h1 {
+        font-size: 1.3rem;
+      }
+      .contact-container {
+        padding: 1.2rem;
+        margin: 0 0.5rem;
+        max-width: 95%;
+        grid-template-columns: 1fr;
+      }
+      .contact-container h2 {
+        font-size: 1.6rem;
+      }
+      .inquiry-button {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Additional CSS for responsive map iframe */
+    .map-iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .map-iframe {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <img src="images/logo.png" alt="GB Construction Company Limited Logo">
+      </div>
+      <h1>GB Construction <br> Company Limited</h1>
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="project.html">PROJECT</a>
+      <a href="contact.html" style="font-weight:700;">CONTACT</a>
+      <a href="services.html">SERVICES</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="contact-container">
+      <h2>Contact Us</h2>
+      <!-- Company Information Section -->
+      <div class="company-info">
+        <h3>COMPANY INFORMATION</h3>
+        <div class="info-item">
+          <span class="info-label">NAME:</span>
+          <div class="info-content">
+            <i class="fas fa-building"></i>
+            <span>GB Construction Company Limited</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">SOCIAL MEDIA LINK:</span>
+          <div class="info-content">
+            <i class="fab fa-facebook"></i>
+            <a href="https://www.facebook.com/noel.baron.2025" target="_blank">Facebook</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">WHATSAPP:</span>
+          <div class="info-content">
+            <i class="fab fa-whatsapp"></i>
+            <a  target="_blank">+675 7217 7890</a>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-label">COMPANY ADDRESS:</span>
+          <div class="info-content">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Goroka Eastern Highlands Province, Papua New Guinea</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map Section -->
+      <div class="map-section">
+        <h3>LOCATION</h3>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15878.999999999999!2d145.3496348!3d-6.0855491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x68587364e20e5af7%3A0x66d4608ad2f105f7!2sGoroka%2C%20Eastern%20Highlands%20Province%2C%20Papua%20New%20Guinea!5e0!3m2!1sen!2sus!4v1690000000000!5m2!1sen!2sus" 
+          class="map-iframe"
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <!-- Email Inquiry Section -->
+      <div class="email-inquiry">
+        <h3>SEND INQUIRY VIA EMAIL</h3>
+        <p>Have questions or need a quote? Send us an email directly.</p>
+        <a href="mailto:noelbaron63@gmail.com?subject=Inquiry%20from%20GB%20Construction%20Website&body=Hello,%20I%20am%20interested%20in%20your%20construction%20services.%20Please%20provide%20more%20details%20about..." class="inquiry-button">
+          Send Inquiry via Email <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    </div>
+  </footer>
+</body>
+</html>
