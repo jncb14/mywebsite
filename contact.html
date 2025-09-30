@@ -4,87 +4,110 @@
   <meta charset="UTF-8">
   <title>Contact - GB Construction Company Limited</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="images/logo.png">
   <style>
-    /* === BLACK & WHITE THEME === */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --primary: #1a5276;
+      --secondary: #f39c12;
+      --accent: #2c3e50;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --transition: all 0.3s ease;
     }
-
-    html, body {
-      height: 100%;
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
     }
-
+    
+    html, body { 
+      height: 100%; 
+      scroll-behavior: smooth;
+    }
+    
     body {
-      h1, h2, h3 {
-        font-family: 'Montserrat', sans-serif;
-      }
-      body, p {
-        font-family: 'Roboto', sans-serif;
-      }
-      color: #000; /* BLACK TEXT */
-      background: #fff; /* WHITE BACKGROUND */
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
+      background: #fff;
       line-height: 1.6;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* ===== HEADER ===== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fff; /* WHITE BACKGROUND */
+      background: rgba(255, 255, 255, 0.95);
       padding: 1rem 2rem;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      border-bottom: 2px solid #000; /* BLACK BORDER */
-      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+    
+    header.scrolled {
+      padding: 0.7rem 2rem;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-
-    .logo img {
-      height: 50px;
-      width: auto;
+    
+    .brand { 
+      display: flex; 
+      align-items: center; 
+      gap: 0.8rem; 
     }
-
-    header h1 {
-      font-size: 1.6rem;
+    
+    .logo img { 
+      height: 50px; 
+      width: auto; 
+    }
+    
+    .companyName { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      color: var(--primary);
       line-height: 1.2;
-      color: #000; /* BLACK TEXT */
-      font-weight: 700;
     }
-
-    /* ===== NAVIGATION ===== */
-    nav {
-      display: flex;
-    }
-
+    
+    nav { display: flex; }
+    
     nav a {
-      color: #000; /* BLACK TEXT */
-      margin-left: 20px;
+      color: var(--dark);
+      margin-left: 25px;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       position: relative;
-      transition: color 0.3s ease;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-
-    nav a:hover {
-      color: #555; /* DARK GRAY ON HOVER */
+    
+    nav a:hover { 
+      color: var(--secondary); 
     }
-
+    
+    nav a.active {
+      color: var(--secondary);
+    }
+    
     nav a::after {
       content: '';
       position: absolute;
@@ -92,330 +115,617 @@
       height: 2px;
       bottom: -5px;
       left: 0;
-      background-color: #000; /* BLACK UNDERLINE */
+      background-color: var(--secondary);
       transition: width 0.3s ease;
     }
-
-    nav a:hover::after {
-      width: 100%;
+    
+    nav a:hover::after,
+    nav a.active::after { 
+      width: 100%; 
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
     }
 
-    /* ===== HERO SECTION ===== */
+    /* Hero Section */
     .hero {
-      background: url('images/PAP.jpg') no-repeat center center/cover;
-      flex: 1;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/PAP.jpg') no-repeat center center/cover;
+      height: 50vh;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem;
+      margin-top: 85px;
+      color: white;
+      text-align: center;
     }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6); /* DARK OVERLAY */
-    }
-
-    /* ===== CONTACT CONTAINER ===== */
-    .contact-container {
-      position: relative;
-      max-width: 1000px;
+    
+    .hero-content {
+      max-width: 900px;
       width: 100%;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.85); /* WHITE BACKGROUND WITH TRANSPARENCY */
-      border: 2px solid #000; /* BLACK BORDER */
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      backdrop-filter: blur(6px);
-      color: #000; /* BLACK TEXT */
-      z-index: 1;
+      z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 6rem 2rem;
+    }
+    
+    .section-light {
+      background: var(--light);
+    }
+    
+    .section-white {
+      background: white;
+    }
+    
+    .section-dark {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-dark .section-title h2 {
+      color: white;
+    }
+    
+    .section-dark .section-title h2::after {
+      background: var(--secondary);
+    }
+    
+    .section-title p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .section-dark .section-title p {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Contact Content */
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
       gap: 2rem;
     }
-
-    .contact-container h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #000; /* BLACK TEXT */
-      grid-column: 1 / -1;
-      text-align: center;
+    
+    .contact-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
     }
-
-    /* ===== COMPANY INFO SECTION ===== */
-    .company-info {
-      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000; /* BLACK BORDER */
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
-
-    .company-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #000; /* BLACK TEXT */
-      text-align: center;
-      font-weight: 600;
+    
+    .contact-card h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
-
+    
+    .contact-card h3 i {
+      color: var(--secondary);
+    }
+    
     .info-item {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #ccc;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #eee;
     }
-
+    
     .info-item:last-child {
       border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
-
+    
     .info-label {
-      font-weight: 700;
+      font-weight: 600;
+      color: var(--dark);
       margin-bottom: 0.5rem;
       display: block;
     }
-
+    
     .info-content {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       font-size: 1rem;
     }
-
+    
     .info-content i {
-      color: #000; /* BLACK ICONS */
+      color: var(--secondary);
       font-size: 1.2rem;
       width: 20px;
     }
-
+    
     .info-content a {
-      color: #000; /* BLACK TEXT */
+      color: var(--gray);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: var(--transition);
     }
-
+    
     .info-content a:hover {
-      color: #555; /* DARK GRAY ON HOVER */
+      color: var(--primary);
     }
 
-    /* ===== MAP SECTION ===== */
-    .map-section {
-      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000; /* BLACK BORDER */
-      display: flex;
-      flex-direction: column;
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
-
-    .map-section h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #000; /* BLACK TEXT */
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .map-placeholder {
-      flex: 1;
-      background: #ddd;
-      border: 1px solid #000;
+    
+    .contact-form h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      min-height: 200px;
+      gap: 0.8rem;
     }
-
-    /* ===== EMAIL INQUIRY SECTION ===== */
-    .email-inquiry {
-      grid-column: 1 / -1;
-      background: #f4f4f4; /* LIGHT GRAY BACKGROUND */
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000; /* BLACK BORDER */
-      text-align: center;
+    
+    .contact-form h3 i {
+      color: var(--secondary);
     }
-
-    .email-inquiry h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #000; /* BLACK TEXT */
-      font-weight: 600;
+    
+    .form-group {
+      margin-bottom: 1.5rem;
     }
-
-    .inquiry-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.9rem 1.7rem;
-      background: #000; /* BLACK BACKGROUND */
-      color: #fff; /* WHITE TEXT */
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      margin-bottom: 1rem;
-    }
-
-    .inquiry-button:hover {
-      background: #333; /* DARK GRAY ON HOVER */
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: #000; /* BLACK BACKGROUND */
-      padding: 1rem;
-      text-align: center;
-      color: #fff; /* WHITE TEXT */
-      border-top: 2px solid #000;
-      flex-shrink: 0;
-    }
-
-    footer p {
-      font-size: 0.85rem;
+    
+    .form-group label {
+      display: block;
       margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark);
     }
-
-    footer .social-icons {
-      margin-top: 0.5rem;
+    
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: var(--transition);
+      font-family: 'Open Sans', sans-serif;
     }
-
-    footer .social-icons a {
-      color: #fff; /* WHITE ICONS */
-      font-size: 1.2rem;
-      margin: 0 0.8rem;
-      transition: color 0.3s ease;
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(26, 82, 118, 0.2);
     }
-
-    footer .social-icons a:hover {
-      color: #aaa; /* LIGHT GRAY ON HOVER */
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
     }
-
-    /* ===== MEDIA QUERIES ===== */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0.8rem 1rem;
-      }
-      nav {
-        margin-top: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav a {
-        margin: 5px 0;
-      }
-      header h1 {
-        font-size: 1.3rem;
-      }
-      .contact-container {
-        padding: 1.2rem;
-        margin: 0 0.5rem;
-        max-width: 95%;
-        grid-template-columns: 1fr;
-      }
-      .contact-container h2 {
-        font-size: 1.6rem;
-      }
-      .inquiry-button {
-        padding: 0.7rem 1.3rem;
-        font-size: 0.9rem;
-      }
+    
+    /* Map Section */
+    .map-section {
+      margin-top: 3rem;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
-
-    /* Additional CSS for responsive map iframe */
+    
+    .map-header {
+      padding: 1.5rem 2rem;
+      background: var(--primary);
+      color: white;
+    }
+    
+    .map-header h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .map-header h3 i {
+      color: var(--secondary);
+    }
+    
     .map-iframe {
       width: 100%;
       height: 400px;
       border: 0;
-      border-radius: 8px;
     }
 
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: var(--transition);
+      border: 2px solid var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+    
+    .cta-button:hover { 
+      background: transparent; 
+      color: var(--secondary);
+    }
+    
+    .cta-button.full-width {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1rem 1rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .footer-section h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+    
+    .footer-section p, 
+    .footer-section a { 
+      color: #ccc; 
+      margin-bottom: 0.8rem; 
+      text-decoration: none; 
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .footer-section a:hover { 
+      color: var(--secondary); 
+      padding-left: 5px;
+    }
+    
+    .footer-bottom { 
+      border-top: 1px solid #333; 
+      padding-top: 1.5rem; 
+      text-align: center;
+    }
+    
+    .footer-bottom p { 
+      font-size: 0.85rem; 
+      margin-bottom: 1rem;
+    }
+    
+    .social-icons { 
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .social-icons a { 
+      color: white; 
+      font-size: 1.2rem; 
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .social-icons a:hover { 
+      color: var(--secondary); 
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
     @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      nav a {
+        margin: 0.5rem 0;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .hero {
+        height: 40vh;
+        margin-top: 60px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .section {
+        padding: 4rem 1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .contact-card,
+      .contact-form {
+        padding: 1.5rem;
+      }
+      
       .map-iframe {
         height: 300px;
       }
     }
-    .companyName {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #222;
-  }  
-  .cu {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: black;
-  }
+    
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .companyName {
+        font-size: 1.1rem;
+      }
+      
+      .logo img {
+        height: 40px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="brand">
-      <div class="logo">
-        <img src="images/logo.png" alt="GB Construction Company Limited Logo">
-      </div>
-      <h1 class="companyName">GB Construction <br> Company Limited</h1>
+      <div class="logo"><img src="images/logo.png" alt="GB Construction Logo"></div>
+      <h1 class="companyName">GB Construction Company</h1>
     </div>
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="about.html">ABOUT</a>
-      <a href="project.html">PROJECT</a>
-      <a href="contact.html" style="font-weight:700;">CONTACT</a>
-      <a href="services.html">SERVICES</a>
+    <button class="mobile-toggle" id="mobileToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="project.html">Projects</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="services.html">Services</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-content">
+      <h1>Contact Us</h1>
+      <p>Get in touch with our team to discuss your construction needs</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section section-light">
     <div class="contact-container">
-      <h2 class="cu">Contact Us</h2>
-      <!-- Company Information Section -->
-      <div class="company-info">
-        <h3>COMPANY INFORMATION</h3>
-        <div class="info-item">
-          <span class="info-label">NAME:</span>
-          <div class="info-content">
-            <i class="fas fa-building"></i>
-            <span>GB Construction Company Limited</span>
+      <div class="section-title">
+        <h2>Get In Touch</h2>
+        <p>Reach out to us for inquiries, quotes, or to discuss your construction project</p>
+      </div>
+      
+      <div class="contact-grid">
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <div class="contact-card">
+            <h3><i class="fas fa-building"></i> Company Information</h3>
+            <div class="info-item">
+              <span class="info-label">Company Name:</span>
+              <div class="info-content">
+                <span>GB Construction Company Limited</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Address:</span>
+              <div class="info-content">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Goroka, Eastern Highlands Province, Papua New Guinea</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Business Hours:</span>
+              <div class="info-content">
+                <i class="fas fa-clock"></i>
+                <span>Monday - Friday: 8:00 AM - 5:00 PM</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <h3><i class="fas fa-phone-alt"></i> Contact Details</h3>
+            <div class="info-item">
+              <span class="info-label">Phone / WhatsApp:</span>
+              <div class="info-content">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/67572177890" target="_blank">+675 7217 7890</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Email:</span>
+              <div class="info-content">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:noelbaron63@gmail.com">noelbaron63@gmail.com</a>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Social Media:</span>
+              <div class="info-content">
+                <i class="fab fa-facebook"></i>
+                <a href="https://www.facebook.com/noel.baron.2025" target="_blank">Facebook Page</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <h3><i class="fas fa-paper-plane"></i> Quick Inquiry</h3>
+            <p>Prefer to send us a direct email? Use the button below to compose your message.</p>
+            <a href="mailto:noelbaron63@gmail.com?subject=Construction Inquiry&body=Hello, I am interested in your construction services. Please provide more information about..." class="cta-button full-width" style="margin-top: 1rem;">
+              Send Email <i class="fas fa-envelope"></i>
+            </a>
           </div>
         </div>
-        <div class="info-item">
-          <span class="info-label">SOCIAL MEDIA LINK:</span>
-          <div class="info-content">
-            <i class="fab fa-facebook"></i>
-            <a href="https://www.facebook.com/noel.baron.2025" target="_blank">Facebook</a>
-          </div>
-        </div>
-        <div class="info-item">
-          <span class="info-label">WHATSAPP:</span>
-          <div class="info-content">
-            <i class="fab fa-whatsapp"></i>
-            <a  target="_blank">+675 7217 7890</a>
-          </div>
-        </div>
-        <div class="info-item">
-          <span class="info-label">COMPANY ADDRESS:</span>
-          <div class="info-content">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Goroka Eastern Highlands Province, Papua New Guinea</span>
-          </div>
+        
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <h3><i class="fas fa-comment-dots"></i> Send Us a Message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" class="form-control" placeholder="What is this regarding?" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" class="form-control" placeholder="Please provide details about your construction needs..." required></textarea>
+            </div>
+            
+            <button type="submit" class="cta-button full-width">Send Message <i class="fas fa-paper-plane"></i></button>
+          </form>
         </div>
       </div>
-
-      <!-- Google Map Section -->
+      
+      <!-- Map Section -->
       <div class="map-section">
-        <h3>LOCATION</h3>
+        <div class="map-header">
+          <h3><i class="fas fa-map-marked-alt"></i> Our Location</h3>
+        </div>
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15878.999999999999!2d145.3496348!3d-6.0855491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x68587364e20e5af7%3A0x66d4608ad2f105f7!2sGoroka%2C%20Eastern%20Highlands%20Province%2C%20Papua%20New%20Guinea!5e0!3m2!1sen!2sus!4v1690000000000!5m2!1sen!2sus" 
           class="map-iframe"
@@ -424,28 +734,106 @@
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
+    </div>
+  </section>
 
-      <!-- Email Inquiry Section -->
-      <div class="email-inquiry">
-        <h3>SEND INQUIRY VIA EMAIL</h3>
-        <p>Have questions? Send us an email directly.</p>
-        <a href="mailto:noelbaron63@gmail.com?subject=Inquiry%20from%20GB%20Construction%20Webs
-        ite&body=Hello,%20I%20am%20interested%20in%20your%20construction%20services.%20Please%2
-        0provide%20more%20details%20about..." class="inquiry-button">
-          Email <i></i>
-        </a>
-      </div>
+  <!-- CTA Section -->
+  <section class="section section-dark">
+    <div class="section-title">
+      <h2>Ready to Start Your Project?</h2>
+      <p>Contact us today for a free consultation and quote</p>
+    </div>
+    <div style="text-align: center;">
+      <a href="tel:+67572177890" class="cta-button" style="margin-right: 1rem;">
+        <i class="fas fa-phone"></i> Call Us
+      </a>
+      <a href="https://wa.me/67572177890" target="_blank" class="cta-button">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>GB Construction Company Limited</h3>
+        <p>Building with strength and integrity since 2005. Your trusted partner for quality construction in Papua New Guinea.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-phone"></i> +675 7217 7890</p>
+        <p><i class="fas fa-envelope"></i> noelbaron63@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Goroka, Eastern Highlands Province, Papua New Guinea</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="project.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+      mobileToggle.innerHTML = mainNav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Header Scroll Effect
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      
+      // In a real application, you would send this data to a server
+      // For this example, we'll just show an alert and reset the form
+      alert(`Thank you ${name}! Your message has been sent. We'll contact you at ${email} soon.`);
+      contactForm.reset();
+    });
+  </script>
 </body>
 </html>

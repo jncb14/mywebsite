@@ -4,213 +4,477 @@
   <meta charset="UTF-8">
   <title>About - GB Construction Company Limited</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="images/logo.png">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
-
+    :root {
+      --primary: #1a5276;
+      --secondary: #f39c12;
+      --accent: #2c3e50;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --transition: all 0.3s ease;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    html, body { 
+      height: 100%; 
+      scroll-behavior: smooth;
+    }
+    
     body {
-      h1, h2, h3 {
-        font-family: 'Montserrat', sans-serif;
-      }
-      body, p {
-        font-family: 'Roboto', sans-serif;
-      }
-      color: #000;
+      font-family: 'Open Sans', sans-serif;
+      color: var(--dark);
       background: #fff;
       line-height: 1.6;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* HEADER */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
       padding: 1rem 2rem;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      border-bottom: 2px solid #000;
-      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
     }
-    .brand { display: flex; align-items: center; gap: 0.8rem; }
-    .logo img { height: 50px; width: auto; }
-    header h1 { font-size: 1.6rem; line-height: 1.2; color: #000; font-weight: 700; }
+    
+    header.scrolled {
+      padding: 0.7rem 2rem;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .brand { 
+      display: flex; 
+      align-items: center; 
+      gap: 0.8rem; 
+    }
+    
+    .logo img { 
+      height: 50px; 
+      width: auto; 
+    }
+    
+    .companyName { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    
     nav { display: flex; }
+    
     nav a {
-      color: #000;
-      margin-left: 20px;
+      color: var(--dark);
+      margin-left: 25px;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       position: relative;
-      transition: color 0.3s ease;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    nav a:hover { color: #555; }
+    
+    nav a:hover { 
+      color: var(--secondary); 
+    }
+    
+    nav a.active {
+      color: var(--secondary);
+    }
+    
     nav a::after {
       content: '';
       position: absolute;
-      width: 0; height: 2px;
-      bottom: -5px; left: 0;
-      background-color: #000;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--secondary);
       transition: width 0.3s ease;
     }
-    nav a:hover::after { width: 100%; }
+    
+    nav a:hover::after,
+    nav a.active::after { 
+      width: 100%; 
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
 
-    /* front */
+    /* front Section */
     .front {
-      background: url('images/PAP.jpg') no-repeat center center/cover;
-      flex: 1;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/PAP.jpg') no-repeat center center/cover;
+      height: 60vh;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding-top: 1rem;
+      padding-bottom: .1rem;
+      margin-top: 85px;
+      color: white;
+      text-align: center;
     }
-    .front::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-    }
-
-    /* ABOUT CONTAINER */
-    .about-container {
-      position: relative;
-      max-width: 1200px;
+    
+    .front-content {
+      max-width: 900px;
       width: 100%;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid #000;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      backdrop-filter: blur(6px);
-      color: #000;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2rem;
+      z-index: 2;
     }
-    .left-column {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    
+    .front h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .right-column {
-      display: grid;
-      grid-template-rows: auto auto;
-      gap: 1.5rem;
-    }
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+    
+    .front p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
     }
 
-    /* INFO CARDS */
-    .info-card {
-      background: #f4f4f4;
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000;
+    /* Section Styling */
+    .section {
+      padding: 6rem 2rem;
+    }
+    
+    .section-light {
+      background: var(--light);
+    }
+    
+    .section-white {
+      background: white;
+    }
+    
+    .section-dark {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-dark .section-title h2 {
+      color: white;
+    }
+    
+    .section-dark .section-title h2::after {
+      background: var(--secondary);
+    }
+    
+    .section-title p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .section-dark .section-title p {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* About Content */
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
       text-align: justify;
     }
-    .info-card h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-      color: #000;
-      font-weight: 600;
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
     }
-
-    /* VALUES */
-    .values-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-    .value-card {
-      background: #e8e8e8;
-      padding: 1rem;
+    
+    .about-text h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-text p { 
+      margin-bottom: 1.5rem; 
+      color: var(--gray);
+    }
+    
+    .about-highlights {
+      background: var(--light);
+      padding: 2.5rem;
       border-radius: 8px;
-      border: 1px solid #000;
+      border-left: 4px solid var(--secondary);
     }
-    .value-card h4 {
-      text-align: center;
-      color: #000;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
+    
+    .about-highlights h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--primary);
+    }
+    
+    .highlight-item {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--dark);
+    }
+    
+    .highlight-item:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: var(--secondary);
     }
 
-    /* PEOPLE INFO (company-info style) */
-    .person-info {
-      background: #f4f4f4;
+    /* Mission & Values */
+    .mission-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      text-align: justify;
+    }
+    
+    .mission-card, .values-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .mission-card h3, .values-card h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .value-item {
       padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000;
+      background: var(--light);
+      border-radius: 6px;
+      border-left: 3px solid var(--secondary);
     }
-    .person-info h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #000;
-      text-align: center;
-      font-weight: 600;
+    
+    .value-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
     }
-    .info-item {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #ccc;
-    }
-    .info-item:last-child { border-bottom: none; }
-    .info-label { font-weight: 700; margin-bottom: 0.5rem; display: block; }
 
-    /* CERTIFICATE SLIDER */
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .team-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      text-align: center;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .team-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .team-info {
+      padding: 1.5rem;
+    }
+    
+    .team-info h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .team-info .position {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .team-details {
+      text-align: left;
+    }
+    
+    .team-detail {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .team-detail:last-child {
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      font-weight: 600;
+      color: var(--dark);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    
+    .detail-value {
+      color: var(--gray);
+    }
+
+    /* Certificates Section */
+    .certificates-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
     .certificate-slider {
       position: relative;
-      background: #f4f4f4;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       text-align: center;
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000;
     }
-    .certificate-slide { display: none; }
-    .certificate-slide.active { display: block; }
+    
+    .certificate-slide { 
+      display: none; 
+    }
+    
+    .certificate-slide.active { 
+      display: block; 
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
     .certificate-slide p {
-      margin-bottom: 1rem;
-      font-weight: bold;
-      color: #000;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.2rem;
     }
+    
     .view-btn {
-      padding: 0.4rem 1rem;
-      background: #000;
-      color: #fff;
+      padding: 0.7rem 1.5rem;
+      background: var(--secondary);
+      color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s ease;
+      font-weight: 600;
+      transition: var(--transition);
     }
-    .view-btn:hover { background: #444; }
+    
+    .view-btn:hover { 
+      background: #e67e22; 
+    }
+    
     .nav-arrows {
-      margin-top: 1rem;
+      margin-top: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
+    
     .arrow-btn {
-      background: #000;
-      color: #fff;
+      background: var(--primary);
+      color: white;
       border: none;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
     }
-    .slide-indicator { font-size: 0.9rem; }
+    
+    .arrow-btn:hover { 
+      background: var(--accent); 
+    }
+    
+    .slide-indicator { 
+      font-size: 1rem; 
+      font-weight: 600;
+      color: var(--primary);
+    }
 
-    /* MODAL */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -219,7 +483,9 @@
       background: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
+      padding: 1rem;
     }
+    
     .modal-content {
       position: relative;
       max-width: 90%;
@@ -228,273 +494,467 @@
       flex-direction: column;
       align-items: center;
     }
+    
     .modal-content img {
       max-width: 100%;
       max-height: 80vh;
       border-radius: 8px;
-      border: 2px solid #fff;
+      border: 2px solid white;
       transition: transform 0.3s ease;
     }
+    
     .close-btn {
       position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #000;
-      color: #fff;
+      top: -15px;
+      right: -15px;
+      background: var(--primary);
+      color: white;
       border: none;
       font-size: 1.5rem;
       border-radius: 50%;
       cursor: pointer;
-      width: 35px; height: 35px;
+      width: 40px; 
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .close-btn:hover { 
+      background: var(--accent); 
+    }
+    
+    .rotate-btn {
+      margin-top: 1rem;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .rotate-btn:hover { 
+      background: #e67e22; 
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      background: var(--secondary);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: var(--transition);
+      border: 2px solid var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .cta-button:hover { 
+      background: transparent; 
+      color: var(--secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1rem 1rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .footer-section h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--secondary);
+      font-size: 1.2rem;
+    }
+    
+    .footer-section p, 
+    .footer-section a { 
+      color: #ccc; 
+      margin-bottom: 0.8rem; 
+      text-decoration: none; 
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .footer-section a:hover { 
+      color: var(--secondary); 
+      padding-left: 5px;
+    }
+    
+    .footer-bottom { 
+      border-top: 1px solid #333; 
+      padding-top: 1.5rem; 
+      text-align: center;
+    }
+    
+    .footer-bottom p { 
+      font-size: 0.85rem; 
+      margin-bottom: 1rem;
+    }
+    
+    .social-icons { 
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .social-icons a { 
+      color: white; 
+      font-size: 1.2rem; 
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .rotate-btn {
-      margin-top: 1rem;
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-    .rotate-btn:hover { background: #444; }
-
-    /* FOOTER */
-    footer {
-      background: #000;
-      padding: 1rem;
-      text-align: center;
-      color: #fff;
-      border-top: 2px solid #000;
-      flex-shrink: 0;
-    }
-    footer p { font-size: 0.85rem; margin-bottom: 0.5rem; }
-    footer .social-icons { margin-top: 0.5rem; }
-    footer .social-icons a {
-      color: #fff;
-      font-size: 1.2rem;
-      margin: 0 0.8rem;
+    
+    .social-icons a:hover { 
+      color: var(--secondary); 
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
     }
 
-    /* MEDIA QUERIES */
-    @media (max-width: 900px) {
-      .about-container { grid-template-columns: 1fr; padding: 1.5rem; }
-      .top-grid { grid-template-columns: 1fr; }
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .about-content,
+      .mission-values {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .front h1 {
+        font-size: 2.5rem;
+      }
     }
+    
     @media (max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; padding: 0.8rem 1rem; }
-      nav { margin-top: 10px; flex-direction: column; align-items: flex-start; }
-      nav a { margin: 5px 0; }
-      header h1 { font-size: 1.3rem; }
-      .about-container { padding: 1.2rem; margin: 0 0.5rem; max-width: 95%; }
-      .info-card, .person-info, .certificate-slider { padding: 1rem; }
+      header {
+        padding: 1rem;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      nav a {
+        margin: 0.5rem 0;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .front {
+        height: 50vh;
+        margin-top: 60px;
+      }
+      
+      .front h1 {
+        font-size: 2rem;
+      }
+      
+      .front p {
+        font-size: 1rem;
+      }
+      
+      .section {
+        padding: 4rem 1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .mission-card, 
+      .values-card,
+      .certificate-slider {
+        padding: 1.5rem;
+      }
     }
-      .profile-img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #000;
-    margin: 0 auto 1rem;
-    display: block;
-  }
-  .companyName {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #222;
-  }  
+    
+    @media (max-width: 576px) {
+      .front h1 {
+        font-size: 1.8rem;
+      }
+      
+      .companyName {
+        font-size: 1.1rem;
+      }
+      
+      .logo img {
+        height: 40px;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="brand">
-      <div class="logo">
-        <img src="images/logo.png" alt="GB Construction Company Limited Logo">
-      </div>
-      <h1 class="companyName">GB Construction <br> Company Limited</h1>
+      <div class="logo"><img src="images/logo.png" alt="GB Construction Logo"></div>
+      <h1 class="companyName">GB Construction Company</h1>
     </div>
-    <nav>
-      <a href="index.html">HOME</a>
-      <a href="about.html" style="font-weight:700;">ABOUT</a>
-      <a href="project.html">PROJECT</a>
-      <a href="contact.html">CONTACT</a>
-      <a href="services.html">SERVICES</a>
+    <button class="mobile-toggle" id="mobileToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="project.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="services.html">Services</a>
     </nav>
   </header>
 
   <!-- front Section -->
   <section class="front">
-    <div class="about-container">
-      <!-- Left column -->
-      <div class="left-column">
-        <div class="info-card">
-          <h3>Overview</h3>
-          <p>GB Construction Company Limited acts as a Main Contractor specializing in commercial, residential, and infrastructure construction projects. With years of experience in the industry, we have built a reputation for quality workmanship, timely delivery, and exceptional customer service.</p>
-          <p>Our team of skilled professionals is dedicated to transforming your vision into reality, ensuring every project meets the highest standards of safety and quality. We take pride in our ability to handle projects of varying scales and complexities, from small renovations to large-scale developments.</p>
-        </div>
+    <div class="front-content">
+      <h1>About GB Construction Company Limited</h1>
+      <p>Company Background</p>
+    </div>
+  </section>
 
-        <div class="info-card">
-          <h3>Mission</h3>
+  <!-- Overview Section -->
+  <section class="section section-light">
+    <div class="about-container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Company Overview</h2>
+          <p>
+            GB Construction Company is an organization that takes on the role as Main Contractor 
+            for Small to Large size projects and performs project management services to coordinates 
+            specialist trades for industrial / commercial projects. We also provide design inputs and 
+            engineering solutions as a value-add services to our clients.
+          </p>
+          <p>
+            Our objective is to provide our clients with an "I am assured" experience when we are 
+            chosen to execute their projects. Our emphasis on clear communication and follow-through 
+            procedures ensures that client's objective is our top priority in the planning and 
+            execution of all our processes. This is what we call "we build and connect".
+          </p>
+          <!-- <a href="contact.html" class="cta-button">Get In Touch</a> -->
+        </div>
+        <div class="about-highlights">
+          <h3>Our Commitment</h3>
+          <div class="highlight-item">Highest regard to Quality, Honesty, Integrity and Customer Satisfaction</div>
+          <div class="highlight-item">Cooperation with the Government of Papua New Guinea</div>
+          <div class="highlight-item">Complete projects on time with superb quality at competitive prices</div>
+          <div class="highlight-item">Utilization of modern technologies and best practices</div>
+          <div class="highlight-item">Development of client ideas and projects in an environment of trust</div>
+        </div>
+      </div>
+
+      <!-- Mission & Values -->
+      <div class="mission-values">
+        <div class="mission-card">
+          <h3>Our Mission</h3>
           <p>Our mission is to serve our customers with excellence and exceed their expectations through innovative construction solutions, superior craftsmanship, and unwavering commitment to quality.</p>
           <p>We strive to build lasting relationships with our clients by delivering projects on time and within budget while maintaining the highest standards of safety and professionalism.</p>
         </div>
-
-        <div class="info-card">
-          <h3>Values</h3>
+        <div class="values-card">
+          <h3>Our Values</h3>
           <div class="values-grid">
-            <div class="value-card">
+            <div class="value-item">
               <h4>Truth and Honesty</h4>
               <p>We act with authenticity and integrity, true to ourselves, customers, partners, and employees. These values ensure long-term success and resilience.</p>
             </div>
-            <div class="value-card">
+            <div class="value-item">
               <h4>Trust and Empowerment</h4>
               <p>We honor trust in people, partners, and employees, empowering management and executives to build solid business and strong relationships.</p>
             </div>
-            <div class="value-card">
+            <div class="value-item">
               <h4>Commitment and Responsibility</h4>
               <p>Since inception, we commit to our country, community, and business. Dedicated people strengthen our growth daily.</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Right column -->
-      <div class="right-column">
-        <div class="top-grid">
-          <!-- Noel -->
-          <div class="person-info">
-            <img src="images/profile1.png" class="profile-img">
-            <h3>GENERAL MANAGER</h3>
-            <div class="info-item">
-              <span class="info-label">NAME:</span>
-              <span>MR. NOEL P. BARON</span>
+  <!-- Team Section -->
+  <section class="section section-white">
+    <div class="section-title">
+      <h2>Our Team</h2>
+      <!-- <p>Meet the dedicated professionals behind GB Construction</p> -->
+    </div>
+    <div class="team-grid">
+      <!-- Noel -->
+      <div class="team-card">
+        <img src="images/img.png" alt="Noel P. Baron" class="team-img">
+        <div class="team-info">
+          <h3>MR. NOEL P. BARON</h3>
+          <span class="position">GENERAL MANAGER</span>
+          <div class="team-details">
+            <div class="team-detail">
+              <span class="detail-label">YEARS OF EXPERIENCE:</span>
+              <span class="detail-value">15 YEARS</span>
             </div>
-            <div class="info-item">
-              <span class="info-label">YEARS OF EXPERIENCE:</span>
-              <span>15 YEARS</span>
+            <div class="team-detail">
+              <span class="detail-label">EDUCATION:</span>
+              <span class="detail-value">BS CIVIL ENGINEERING</span>
             </div>
-            <div class="info-item">
-              <span class="info-label">EDUCATION:</span>
-              <span>BS CIVIL ENGINEERING</span>
+            <div class="team-detail">
+              <span class="detail-label">RELEVANT EXPERIENCE:</span>
+              <span class="detail-value">BUILDING CONSTRUCTION</span>
             </div>
-            <div class="info-item">
-              <span class="info-label">PROPOSED DESIGNATION:</span>
-              <span>GENERAL MANAGER</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">RELEVANT EXPERIENCE:</span>
-              <span>BUILDING CONSTRUCTION</span>
-            </div>
-          </div>
-
-          <!-- Mickey -->
-          <div class="person-info">
-            <img src="images/profile2.png" class="profile-img">
-            <h3>ADMIN MANAGER</h3>
-            <div class="info-item">
-              <span class="info-label">NAME:</span>
-              <span>MR. MICKEY KAUGA</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">YEARS OF EXPERIENCE:</span>
-              <span>5 YEARS</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">EDUCATION:</span>
-              <span>BS B.A</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">PROPOSED DESIGNATION:</span>
-              <span>ADMIN MANAGER</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">RELEVANT EXPERIENCE:</span>
-              <span>CONSTRUCTION MANAGEMENT</span>
-            </div>
-          </div>
-
-          <!-- Ronnie -->
-          <div class="person-info">
-            <img src="images/profile3.png" class="profile-img">
-            <h3>PROJECT MANAGER</h3>
-            <div class="info-item">
-              <span class="info-label">NAME:</span>
-              <span>MR. RONNIE ANDRADE</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">YEARS OF EXPERIENCE:</span>
-              <span>15 YEARS</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">EDUCATION:</span>
-              <span>PROJECT MANAGER</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">PROPOSED DESIGNATION:</span>
-              <span>PROJECT MANAGER</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">RELEVANT EXPERIENCE:</span>
-              <span>BUILDING CONSTRUCTION</span>
-            </div>
-          </div>
-
-          <!-- Edwin -->
-          <div class="person-info">
-            <img src="images/profile4.png" class="profile-img">
-            <h3>SITE SUPERVISOR</h3>
-            <div class="info-item">
-              <span class="info-label">NAME:</span>
-              <span>MR. EDWIN CALIMOSO</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">YEARS OF EXPERIENCE:</span>
-              <span>10 YEARS</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">EDUCATION:</span>
-              <span>PROJECT SUPERVISOR</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">PROPOSED DESIGNATION:</span>
-              <span>SITE SUPERVISOR</span>
-            </div>
-            <div class="info-item">
-              <span class="info-label">RELEVANT EXPERIENCE:</span>
-              <span>BUILDING CONSTRUCTION</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certificates Slider -->
-        <div class="certificate-slider">
-          <div class="certificate-slide active">
-            <p>CERTIFICATE OF INCORPORATION</p>
-            <button class="view-btn" data-img="images/certificate1.png">View</button>
-          </div>
-          <div class="certificate-slide">
-            <p>CERTIFICATE OF COMPLIANCE</p>
-            <button class="view-btn" data-img="images/certificate2.png">View</button>
-          </div>
-          <div class="certificate-slide">
-            <p>TP REGISTRATION CERTIFICATE</p>
-            <button class="view-btn" data-img="images/certificate3.png">View</button>
-          </div>
-
-          <div class="nav-arrows">
-            <button class="arrow-btn" id="prevSlide">&#8592;</button>
-            <span class="slide-indicator" id="slideIndicator">1 / 3</span>
-            <button class="arrow-btn" id="nextSlide">&#8594;</button>
           </div>
         </div>
       </div>
+
+      <!-- Mickey -->
+      <div class="team-card">
+        <img src="images/img.png" alt="Mickey Kauga" class="team-img">
+        <div class="team-info">
+          <h3>MR. MICKEY KAUGA</h3>
+          <span class="position">ADMIN MANAGER</span>
+          <div class="team-details">
+            <div class="team-detail">
+              <span class="detail-label">YEARS OF EXPERIENCE:</span>
+              <span class="detail-value">5 YEARS</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">EDUCATION:</span>
+              <span class="detail-value">BS B.A</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">RELEVANT EXPERIENCE:</span>
+              <span class="detail-value">CONSTRUCTION MANAGEMENT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ronnie -->
+      <div class="team-card">
+        <img src="images/img.png" alt="Ronnie Andrade" class="team-img">
+        <div class="team-info">
+          <h3>MR. RONNIE ANDRADE</h3>
+          <span class="position">PROJECT MANAGER</span>
+          <div class="team-details">
+            <div class="team-detail">
+              <span class="detail-label">YEARS OF EXPERIENCE:</span>
+              <span class="detail-value">15 YEARS</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">EDUCATION:</span>
+              <span class="detail-value">PROJECT MANAGER</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">RELEVANT EXPERIENCE:</span>
+              <span class="detail-value">BUILDING CONSTRUCTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edwin -->
+      <div class="team-card">
+        <img src="images/img.png" alt="Edwin Calimos" class="team-img">
+        <div class="team-info">
+          <h3>MR. EDWIN CALIMOSO</h3>
+          <span class="position">SITE SUPERVISOR</span>
+          <div class="team-details">
+            <div class="team-detail">
+              <span class="detail-label">YEARS OF EXPERIENCE:</span>
+              <span class="detail-value">10 YEARS</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">EDUCATION:</span>
+              <span class="detail-value">PROJECT SUPERVISOR</span>
+            </div>
+            <div class="team-detail">
+              <span class="detail-label">RELEVANT EXPERIENCE:</span>
+              <span class="detail-value">BUILDING CONSTRUCTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section class="section section-light">
+    <div class="section-title">
+      <h2>Our Certifications</h2>
+      <p>Official documents that validate our expertise and compliance</p>
+    </div>
+    <div class="certificates-container">
+      <div class="certificate-slider">
+        <div class="certificate-slide active">
+          <p>CERTIFICATE OF INCORPORATION</p>
+          <button class="view-btn" data-img="images/certificate1.png">View Certificate</button>
+        </div>
+        <div class="certificate-slide">
+          <p>CERTIFICATE OF COMPLIANCE</p>
+          <button class="view-btn" data-img="images/certificate2.png">View Certificate</button>
+        </div>
+        <div class="certificate-slide">
+          <p>TP REGISTRATION CERTIFICATE</p>
+          <button class="view-btn" data-img="images/certificate3.png">View Certificate</button>
+        </div>
+
+        <div class="nav-arrows">
+          <button class="arrow-btn" id="prevSlide">&#8592;</button>
+          <span class="slide-indicator" id="slideIndicator">1 / 3</span>
+          <button class="arrow-btn" id="nextSlide">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section section-dark">
+    <div class="section-title">
+      <h2>Ready to Work With Us?</h2>
+      <p>Let's discuss your construction needs and how we can help bring your vision to life</p>
+    </div>
+    <div style="text-align: center;">
+      <a href="contact.html" class="cta-button">Contact Us Today</a>
     </div>
   </section>
 
@@ -503,22 +963,76 @@
     <div class="modal-content">
       <button class="close-btn" id="closeModal">&times;</button>
       <img src="" alt="Full Certificate" id="modalImage">
-      <button class="rotate-btn" id="rotateBtn">Rotate</button>
+      <button class="rotate-btn" id="rotateBtn">Rotate Image</button>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>GB Construction Company Limited</h3>
+        <p>Building with strength and integrity since 2005. Your trusted partner for quality construction in Papua New Guinea.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-phone"></i> +675 7217 7890</p>
+        <p><i class="fas fa-envelope"></i> noelbaron63@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Goroka, Eastern Highlands Province, Papua New Guinea</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="project.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
     </div>
   </footer>
 
   <script>
-    /* SLIDER */
+    // Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+      mobileToggle.innerHTML = mainNav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Header Scroll Effect
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+
+    // Certificate Slider
     const slides = document.querySelectorAll(".certificate-slide");
     const indicator = document.getElementById("slideIndicator");
     let current = 0;
@@ -532,12 +1046,13 @@
       current = (current - 1 + slides.length) % slides.length;
       showSlide(current);
     });
+    
     document.getElementById("nextSlide").addEventListener("click", () => {
       current = (current + 1) % slides.length;
       showSlide(current);
     });
 
-    /* MODAL WITH ROTATE */
+    // Modal with Rotate
     const modal = document.getElementById("imgModal");
     const modalImg = document.getElementById("modalImage");
     const closeBtn = document.getElementById("closeModal");
@@ -554,14 +1069,17 @@
     });
 
     closeBtn.addEventListener("click", () => modal.style.display = "none");
-    modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
-
+    
+    modal.addEventListener("click", e => { 
+      if (e.target === modal) modal.style.display = "none"; 
+    });
 
     rotateBtn.addEventListener("click", () => {
       rotation = (rotation + 90) % 360;
       modalImg.style.transform = `rotate(${rotation}deg)`;
     });
 
+    // Initialize
     showSlide(current);
   </script>
 </body>
