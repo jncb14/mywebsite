@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Favicon -->
@@ -15,25 +15,42 @@
 
   <!-- CSS -->
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
+    :root {
+      --primary: #1a5276;
+      --secondary: #f39c12;
+      --accent: #2c3e50;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --transition: all 0.3s ease;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    html, body { 
+      height: 100%; 
+      scroll-behavior: smooth;
+    }
+    
     body {
-          h1, h2, h3 {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 700; 
-    }
-
-    body, p {
       font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
-    }
-
-      color: #000;
+      color: var(--dark);
       background: #fff;
       line-height: 1.6;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
     /* Header */
@@ -41,41 +58,63 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
       padding: 1rem 2rem;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      border-bottom: 2px solid #000;
-      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
     }
+    
+    header.scrolled {
+      padding: 0.7rem 2rem;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
     .brand { 
       display: flex; 
       align-items: center; 
       gap: 0.8rem; 
     }
+    
     .logo img { 
       height: 50px; 
       width: auto; 
     }
-    header h1 { 
-      font-size: 1.6rem; 
+    
+    .companyName { 
+      font-size: 1.4rem; 
       font-weight: 700; 
-      color: #000;
-      line-height: 1.2; /* Reduce line spacing */
-      white-space: normal; /* Allow normal line breaks */
+      color: var(--primary);
+      line-height: 1.2;
     }
+    
     nav { display: flex; }
+    
     nav a {
-      color: #000;
-      margin-left: 20px;
+      color: var(--dark);
+      margin-left: 25px;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       position: relative;
-      transition: color 0.3s ease;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    nav a:hover { color: #555; }
+    
+    nav a:hover { 
+      color: var(--secondary); 
+    }
+    
+    nav a.active {
+      color: var(--secondary);
+    }
+    
     nav a::after {
       content: '';
       position: absolute;
@@ -83,135 +122,260 @@
       height: 2px;
       bottom: -5px;
       left: 0;
-      background-color: #000;
+      background-color: var(--secondary);
       transition: width 0.3s ease;
     }
-    nav a:hover::after { width: 100%; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header { 
-        flex-direction: column; 
-        align-items: flex-start; 
-        padding: 0.8rem 1rem; 
-      }
-      .brand {
-        width: 100%;
-        justify-content: flex-start;
-      }
-      header h1 { 
-        font-size: 1.3rem; 
-        line-height: 1.1; /* Even tighter on mobile */
-      }
-      nav { 
-        margin-top: 10px; 
-        flex-direction: column; 
-        width: 100%;
-      }
-      nav a { 
-        margin: 5px 0; 
-      }
+    
+    nav a:hover::after,
+    nav a.active::after { 
+      width: 100%; 
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
     }
 
     /* front Section */
     .front {
-      background: url('images/PAP.jpg') no-repeat center center/cover;
-      height: 80vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/PAP.jpg') no-repeat center center/cover;
+      height: 100vh;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem;
-    }
-    .front::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-    }
-    .front-container {
-      position: relative;
+      margin-top: 0;
+      color: white;
       text-align: center;
-      max-width: 1100px;
+    }
+    
+    .front-content {
+      max-width: 900px;
       width: 100%;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid #000;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      backdrop-filter: blur(6px);
-      z-index: 1;
+      z-index: 2;
     }
-    .front-container h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-    .front-container p { font-size: 1.2rem; margin-bottom: 2rem; font-weight: 300; }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
+    
+    .front h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
     }
-    .service-box {
-      background: #f4f4f4;
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid #000;
+    
+    .front p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
     }
-    .service-box i { font-size: 2.5rem; margin-bottom: 0.7rem; }
-    .service-box h3 { font-size: 1.2rem; font-weight: 600; }
-
-    /* CTA Button */
+    
+    .front-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
     .cta-button {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.9rem 1.7rem;
-      background: #000;
-      color: #fff;
+      padding: 0.9rem 1.8rem;
+      background: var(--secondary);
+      color: white;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
-      border-radius: 50px;
+      border-radius: 4px;
+      transition: var(--transition);
+      border: 2px solid var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .cta-button:hover { background: #333; }
+    
+    .cta-button:hover { 
+      background: transparent; 
+      color: var(--secondary);
+    }
+    
+    .cta-button.secondary {
+      background: transparent;
+      border-color: white;
+      color: white;
+    }
+    
+    .cta-button.secondary:hover {
+      background: white;
+      color: var(--dark);
+    }
 
-    /* Overview */
-    .overview-section { padding: 4rem 2rem; background: #f9f9f9; }
-    .overview-container { max-width: 1000px; margin: 0 auto; }
-    .overview-container h2 { font-size: 2.2rem; margin-bottom: 1.5rem; text-align: center; }
+    /* Services Section */
+    .services-section {
+      padding: 6rem 2rem;
+      background: var(--light);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title p {
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .service-card {
+      background: white;
+      padding: 2.5rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--secondary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+    
+    .service-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .service-card p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    /* Overview Section */
+    .overview-section { 
+      padding: 6rem 2rem; 
+      background: white; 
+    }
+    
+    .overview-container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+    }
+    
     .overview-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 4rem;
       align-items: center;
     }
-    .overview-text p { margin-bottom: 1.5rem; text-align: justify; }
-    .overview-highlights {
-      background: #f4f4f4;
-      padding: 2rem;
-      border-radius: 10px;
-      border: 1px solid #000;
+    
+    .overview-text h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
     }
-    .overview-highlights h3 { text-align: center; margin-bottom: 1rem; }
+    
+    .overview-text p { 
+      margin-bottom: 1.5rem; 
+      color: var(--gray);
+    }
+    
+    .overview-highlights {
+      background: var(--light);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .overview-highlights h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--primary);
+    }
+    
     .highlight-item {
       margin-bottom: 1rem;
       padding-left: 1.5rem;
       position: relative;
+      color: var(--dark);
     }
+    
     .highlight-item:before {
-      content: "•";
+      content: "✓";
       position: absolute;
       left: 0;
       font-weight: bold;
+      color: var(--secondary);
     }
 
-    /* Projects */
-    .projects-section { padding: 4rem 2rem; text-align: center; }
-    .section-title { font-size: 2.2rem; margin-bottom: 2rem; }
+    /* Projects Section */
+    .projects-section { 
+      padding: 6rem 2rem; 
+      background: var(--light);
+      text-align: center; 
+    }
+    
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -219,72 +383,163 @@
       max-width: 1200px;
       margin: 0 auto 3rem;
     }
+    
     .project-card {
-      background: #f4f4f4;
-      border-radius: 10px;
+      background: white;
+      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
     }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
     .project-image {
-      height: 200px;
+      height: 220px;
       background-size: cover;
       background-position: center;
       position: relative;
     }
-    .project-image::after {
-      content: "";
+    
+    .project-overlay {
       position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: var(--transition);
     }
-    .project-info { padding: 1.5rem; }
-    .project-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    
+    .project-card:hover .project-overlay {
+      transform: translateY(0);
+    }
+    
+    .project-info { 
+      padding: 1.5rem; 
+    }
+    
+    .project-info h3 { 
+      font-size: 1.3rem; 
+      margin-bottom: 0.5rem; 
+      color: var(--primary);
+    }
+    
+    .project-info p { 
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
 
-    /* FAQ */
-    .faq-section { padding: 4rem 2rem; background: #f9f9f9; text-align: center; }
-    .faq-container { max-width: 1000px; margin: 0 auto; }
+    /* Stats Section */
+    .stats-section {
+      padding: 4rem 2rem;
+      background: var(--primary);
+      color: white;
+    }
+    
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    
+    .stat-item h3 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-item p {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* FAQ Section */
+    .faq-section { 
+      padding: 6rem 2rem; 
+      background: white; 
+      text-align: center; 
+    }
+    
+    .faq-container { 
+      max-width: 1000px; 
+      margin: 0 auto; 
+    }
+    
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
     }
+    
     .faq-card {
-      background: #fff;
+      background: var(--light);
       padding: 2rem;
-      border-radius: 10px;
-      border: 1px solid #000;
+      border-radius: 8px;
       text-align: left;
+      transition: var(--transition);
     }
-    .faq-question { font-weight: 700; margin-bottom: 1rem; }
+    
+    .faq-card:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    
+    .faq-question { 
+      font-weight: 700; 
+      margin-bottom: 1rem; 
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+    
+    .faq-answer { 
+      color: var(--gray);
+    }
 
     /* Contact CTA */
     .contact-cta {
-      padding: 4rem 2rem;
-      background: #000;
-      color: #fff;
+      padding: 6rem 2rem;
+      background: var(--primary);
+      color: white;
       text-align: center;
     }
+    
     .contact-cta h2 { 
       font-size: 2.2rem; 
-      margin-bottom: 1rem;
-      
+      margin-bottom: 1rem; 
     }
+    
+    .contact-cta p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
     .contact-cta .cta-button { 
-      background: #fff;
-      color: #000;
-       }
+      background: white;
+      color: var(--primary);
+      border-color: white;
+    }
+    
     .contact-cta .cta-button:hover { 
-      background: #f4f4f4; 
+      background: transparent; 
+      color: white;
     }
 
     /* Footer */
     footer {
-      background: #000;
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1rem 1rem;
     }
+    
     .footer-content {
       max-width: 1200px;
       margin: 0 auto 2rem;
@@ -292,81 +547,246 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
     }
-    .footer-section h3 { margin-bottom: 1rem; }
-    .footer-section a, .footer-section p { color: #ccc; margin-bottom: 0.5rem; text-decoration: none; }
-    .footer-section a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid #333; padding-top: 1rem; }
-    .footer-bottom p { font-size: 0.85rem; }
-    .social-icons a { color: #fff; font-size: 1.2rem; margin: 0 0.8rem; }
-    .social-icons a:hover { color: #aaa; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; padding: 0.8rem 1rem; }
-      nav { margin-top: 10px; flex-direction: column; }
-      nav a { margin: 5px 0; }
-      header h1 { font-size: 1.3rem; }
-      .front { height: auto; padding: 1rem; }
-      .front-container { padding: 1.2rem; max-width: 95%; }
-      .overview-content { grid-template-columns: 1fr; }
-      .projects-grid, .faq-grid, .footer-content { grid-template-columns: 1fr; }
+    
+    .footer-section h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--secondary);
+      font-size: 1.2rem;
     }
-  .qoute {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #222;
-  }
-  .companyName {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #222;
-  }   
-  
+    
+    .footer-section p, 
+    .footer-section a { 
+      color: #ccc; 
+      margin-bottom: 0.8rem; 
+      text-decoration: none; 
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .footer-section a:hover { 
+      color: var(--secondary); 
+      padding-left: 5px;
+    }
+    
+    .footer-bottom { 
+      border-top: 1px solid #333; 
+      padding-top: 1.5rem; 
+      text-align: center;
+    }
+    
+    .footer-bottom p { 
+      font-size: 0.85rem; 
+      margin-bottom: 1rem;
+    }
+    
+    .social-icons { 
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .social-icons a { 
+      color: white; 
+      font-size: 1.2rem; 
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .social-icons a:hover { 
+      color: var(--secondary); 
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .front h1 {
+        font-size: 2.8rem;
+      }
+      
+      .overview-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+      
+      nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      nav a {
+        margin: 0.5rem 0;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .front {
+        height: 80vh;
+      }
+      
+      .front h1 {
+        font-size: 2.2rem;
+      }
+      
+      .front p {
+        font-size: 1.1rem;
+      }
+      
+      .front-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-button {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+      }
+      
+      .services-section,
+      .overview-section,
+      .projects-section,
+      .faq-section,
+      .contact-cta {
+        padding: 4rem 1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .front h1 {
+        font-size: 1.8rem;
+      }
+      
+      .companyName {
+        font-size: 1.1rem;
+      }
+      
+      .logo img {
+        height: 40px;
+      }
+      
+      .service-card,
+      .project-card,
+      .faq-card {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="brand">
       <div class="logo"><img src="images/logo.png" alt="GB Construction Logo"></div>
-      <h1 class="companyName">GB Construction <br> Company Limited</h1>
+      <h1 class="companyName">GB Construction Company</h1>
     </div>
-    <nav>
-      <a href="index.html" style="font-weight:700;">HOME</a>
-      <a href="about.html">ABOUT</a>
-      <a href="project.html">PROJECT</a>
-      <a href="contact.html">CONTACT</a>
-      <a href="services.html">SERVICES</a>
+    <button class="mobile-toggle" id="mobileToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="mainNav">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="project.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="services.html">Services</a>
     </nav>
   </header>
 
-  <!-- front -->
+  <!-- front Section -->
   <section class="front">
-    <div class="front-container">
-      <h2 class="qoute">We Build With Strength & Integrity</h2>
-      <div class="services-grid">
-        <div class="service-box"><i class="fas fa-building"></i><h3>Commercial</h3></div>
-        <div class="service-box"><i class="fas fa-home"></i><h3>Residential</h3></div>
-        <div class="service-box"><i class="fas fa-road"></i><h3>Infrastructure</h3></div>
-        <div class="service-box"><i class="fas fa-tools"></i><h3>Renovation</h3></div>
+    <div class="front-content">
+      <h1>Building With Strength & Integrity</h1>
+      <p>Your trusted partner for commercial, residential, and infrastructure construction projects in Papua New Guinea.</p>
+      <div class="front-buttons">
+        <a href="contact.html" class="cta-button">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        <a href="project.html" class="cta-button secondary">View Our Work</a>
       </div>
-      <a href="contact.html" class="cta-button">Inquire Now     <i class="fas fa-arrow-right"></i></a>
     </div>
   </section>
 
-  <!-- Overview -->
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-title">
+      <h2>Our Services</h2>
+      <p>Comprehensive construction solutions tailored to your needs</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>Commercial Construction</h3>
+        <p>Office buildings, retail spaces, and commercial facilities built to the highest standards.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <h3>Residential Construction</h3>
+        <p>Custom homes and residential developments designed for comfort and durability.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-road"></i>
+        </div>
+        <h3>Infrastructure</h3>
+        <p>Roads, bridges, and public works projects that connect and strengthen communities.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3>Renovation & Repair</h3>
+        <p>Transforming existing spaces with quality renovations and timely repair services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Section -->
   <section class="overview-section">
     <div class="overview-container">
-      <h2>Company Overview</h2>
       <div class="overview-content">
         <div class="overview-text">
+          <h2>Company Overview</h2>
           <p>
             GB Construction Company is an organization that takes on the role as Main Contractor 
             for Small to Large size projects and performs project management services to coordinates 
@@ -379,6 +799,7 @@
             procedures ensures that client's objective is our top priority in the planning and 
             execution of all our processes. This is what we call "we build and connect".
           </p>
+          <a href="about.html" class="cta-button">Learn More About Us</a>
         </div>
         <div class="overview-highlights">
           <h3>Our Commitment</h3>
@@ -389,57 +810,97 @@
           <div class="highlight-item">Development of client ideas and projects in an environment of trust</div>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="about.html" class="cta-button">Learn More</a>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>50+</h3>
+        <p>Projects Completed</p>
+      </div>
+      <div class="stat-item">
+        <h3>15+</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <h3>25+</h3>
+        <p>Expert Team Members</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>Client Satisfaction</p>
       </div>
     </div>
   </section>
 
-  <!-- Projects -->
+  <!-- Projects Section -->
   <section class="projects-section">
-    <h2 class="section-title">Featured Projects</h2>
+    <div class="section-title">
+      <h2>Featured Projects</h2>
+      <p>Showcasing our recent work and construction excellence</p>
+    </div>
     <div class="projects-grid">
       <div class="project-card">
-        <div class="project-image" style="background-image: url('images/project7.png');"></div>
+        <div class="project-image" style="background-image: url('images/project7.png');">
+          <div class="project-overlay">
+            <h3>Travel Haus Office</h3>
+            <p>Commercial Construction</p>
+          </div>
+        </div>
         <div class="project-info">
           <h3>Construction of Travel Haus Office</h3>
           <p>Located at Airport Goroka, EHP.</p>
         </div>
       </div>
       <div class="project-card">
-        <div class="project-image" style="background-image: url('');"></div>
-        <div class="project-info">
-          <h3></h3>
-          <p></p>
+        <div class="project-image" style="background-image: url('images/project9.png');">
+          <div class="project-overlay">
+            <h3>Design and Build</h3>
+            <p>Residential Project</p>
+          </div>
         </div>
-      </div>
-      <div class="project-card">
-        <div class="project-image" style="background-image: url('images/project9.png');"></div>
         <div class="project-info">
-          <h3>Design and Build</h3>
+          <h3>Design and Build Project</h3>
           <p>Located at North Goroka District, EHP.</p>
         </div>
       </div>
+      <div class="project-card">
+        <div class="project-image" style="background-image: url('images/project8.png');">
+          <div class="project-overlay">
+            <h3>Infrastructure</h3>
+            <p>Community Development</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3>Community Infrastructure Project</h3>
+          <p>Improving connectivity in local communities.</p>
+        </div>
+      </div>
     </div>
-    <a href="project.html" class="cta-button">View All Projects  <i class="fas fa-arrow-right"></i></a>
+    <a href="project.html" class="cta-button">View All Projects <i class="fas fa-arrow-right"></i></a>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ Section -->
   <section class="faq-section">
     <div class="faq-container">
-      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+        <p>Get answers to common questions about our services</p>
+      </div>
       <div class="faq-grid">
         <div class="faq-card">
           <div class="faq-question">Do you handle permits?</div>
-          <div class="faq-answer">Yes, we handle all necessary permits and regulatory requirements.</div>
+          <div class="faq-answer">Yes, we handle all necessary permits and regulatory requirements, ensuring your project complies with all local regulations.</div>
         </div>
         <div class="faq-card">
           <div class="faq-question">What are your payment terms?</div>
-          <div class="faq-answer">We operate on bank-to-bank transfer payments.</div>
+          <div class="faq-answer">We operate on bank-to-bank transfer payments with structured milestones to ensure transparency and mutual satisfaction.</div>
         </div>
         <div class="faq-card">
           <div class="faq-question">What is your coverage area?</div>
-          <div class="faq-answer">We provide construction services throughout Papua New Guinea.</div>
+          <div class="faq-answer">We provide construction services throughout Papua New Guinea, with a focus on the Eastern Highlands Province and surrounding regions.</div>
         </div>
       </div>
     </div>
@@ -448,22 +909,22 @@
   <!-- Contact CTA -->
   <section class="contact-cta">
     <h2>Ready to Start Your Project?</h2>
-    <p>Let's build something great together.</p>
-    <a href="contact.html" class="cta-button">Contact us <i class="fas fa-arrow-right"></i></a>
+    <p>Let's build something great together. Contact us today for a consultation.</p>
+    <a href="contact.html" class="cta-button">Contact Us <i class="fas fa-arrow-right"></i></a>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-section">
-        <h3>GB Construction Limited Company</h3>
-        <p>Building with strength and integrity...</p>
+        <h3>GB Construction Company Limited</h3>
+        <p>Building with strength and integrity since 2005. Your trusted partner for quality construction in Papua New Guinea.</p>
       </div>
       <div class="footer-section">
         <h3>Contact Info</h3>
         <p><i class="fas fa-phone"></i> +675 7217 7890</p>
         <p><i class="fas fa-envelope"></i> noelbaron63@gmail.com</p>
-        <p><i class="fas fa-map-marker-alt"></i> Goroka Eastern Highlands Province, Papua New Guinea</p>
+        <p><i class="fas fa-map-marker-alt"></i> Goroka, Eastern Highlands Province, Papua New Guinea</p>
       </div>
       <div class="footer-section">
         <h3>Quick Links</h3>
@@ -483,6 +944,40 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+      mobileToggle.innerHTML = mainNav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Header Scroll Effect
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('active');
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+  </script>
 
 </body>
 </html>
