@@ -454,6 +454,86 @@
       background: var(--accent); 
     }
 
+    /* Gallery Modal */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    
+    .gallery-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .gallery-main-image {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+      border: 2px solid white;
+    }
+    
+    .gallery-nav {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    
+    .gallery-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .gallery-btn:hover { 
+      background: var(--secondary); 
+    }
+    
+    .gallery-thumbnails {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+      max-width: 100%;
+      padding: 0.5rem 0;
+    }
+    
+    .gallery-thumbnail {
+      width: 80px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+    
+    .gallery-thumbnail:hover,
+    .gallery-thumbnail.active {
+      opacity: 1;
+      border-color: var(--secondary);
+    }
+
     /* Footer */
     footer {
       background: var(--dark);
@@ -609,6 +689,10 @@
         width: 100%;
         max-width: 250px;
       }
+      
+      .gallery-thumbnails {
+        max-width: 90vw;
+      }
     }
     
     @media (max-width: 576px) {
@@ -675,17 +759,17 @@
     <div class="projects-grid">
       <!-- Project 1 -->
       <div class="project-card" data-category="residential">
-        <div class="project-image" style="background-image: url('images/project1.png');">
+        <div class="project-image" style="background-image: url('images/project1.jpg');">
           <div class="project-overlay">
-            <h3>Design and Build</h3>
-            <p>Residential Construction</p>
+            <p>2024</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Residential</span>
-          <h3>Design and Build Project</h3>
-          <p>Located at Paniufa Goroka District, EHP. This residential project showcases our design-build capabilities.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h3>2 & 1 Classroom</h3>
+          <h4>Located at Asaro Primary School, Daulo District.</h4>
+          <p>Price: K250,000.00</p>
+          <a href="#" class="cta-button secondary view-photos" data-project="1">View Photos</a>
         </div>
       </div>
       
@@ -693,15 +777,15 @@
       <div class="project-card" data-category="commercial">
         <div class="project-image" style="background-image: url('images/project2.png');">
           <div class="project-overlay">
-            <h3>Container Office</h3>
-            <p>Commercial Construction</p>
+            <p>2021</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Commercial</span>
           <h3>Container Office</h3>
-          <p>Located at Kudiawa, Simbu Province. A creative commercial space solution using repurposed containers.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at Kudiawa, Simbu Province</h4>
+          <p>Client: Mr. David Bre</p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
         </div>
       </div>
       
@@ -709,15 +793,15 @@
       <div class="project-card" data-category="residential">
         <div class="project-image" style="background-image: url('images/project4.png');">
           <div class="project-overlay">
-            <h3>Resthouse</h3>
-            <p>Residential Construction</p>
+            <p>2020</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Residential</span>
           <h3>Resthouse</h3>
-          <p>Located at KAFIUPA East Goroka, EHP. A comfortable resthouse built with attention to detail and quality.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at KAFIUPA East Goroka, EHP</h4>
+          <p>Client: Mr. Utoro Isekai</p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
         </div>
       </div>
       
@@ -725,15 +809,15 @@
       <div class="project-card" data-category="infrastructure">
         <div class="project-image" style="background-image: url('images/project5.png');">
           <div class="project-overlay">
-            <h3>Noraenda Bridge</h3>
-            <p>Infrastructure Project</p>
+            <p>2020</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Infrastructure</span>
           <h3>Noraenda Bridge</h3>
-          <p>Located at Noraenda, EHP. A vital infrastructure project connecting communities.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at Noraenda, EHP</h4>
+          <p>Client: Eastern Island Provincial Office</p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
         </div>
       </div>
       
@@ -741,15 +825,15 @@
       <div class="project-card" data-category="infrastructure">
         <div class="project-image" style="background-image: url('images/project6.png');">
           <div class="project-overlay">
-            <h3>Bus Stop</h3>
-            <p>Infrastructure Project</p>
+            <p>2021</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Infrastructure</span>
           <h3>Bus Stop (Madang/Lae)</h3>
-          <p>Located at Goroka Town, EHP. A functional and aesthetically pleasing public transportation facility.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at Goroka Town, EHP</h4>
+          <p>Client: Bank South Pacific</p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
         </div>
       </div>
       
@@ -757,15 +841,15 @@
       <div class="project-card" data-category="commercial">
         <div class="project-image" style="background-image: url('images/project7.png');">
           <div class="project-overlay">
-            <h3>Travel Haus Office</h3>
-            <p>Commercial Construction</p>
+            <p>2022</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Commercial</span>
           <h3>Travel Haus Office</h3>
-          <p>Located at Airport Goroka, EHP. A modern office building constructed with precision and efficiency.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at Airport Goroka, EHP</h4>
+          <p>Client: Ms. Keryn</p>
+          <a href="#" class="cta-button secondary view-project">View Photos</a>
         </div>
       </div>
       
@@ -773,58 +857,122 @@
       <div class="project-card" data-category="residential">
         <div class="project-image" style="background-image: url('images/project9.png');">
           <div class="project-overlay">
-            <h3>Design and Build</h3>
-            <p>Residential Construction</p>
+            <p>2022</p>
           </div>
         </div>
         <div class="project-info">
           <span class="project-category">Residential</span>
           <h3>Design and Build</h3>
-          <p>Located at North Goroka District, EHP. Another example of our residential design-build expertise.</p>
-          <a href="#" class="cta-button secondary view-project">View Details</a>
+          <h4>Located at North Goroka District, EHP</h4>
+          <p>Client: Esmael Samak</p>
+          <a href="#" class="cta-button secondary view-photos" data-project="7">View Photos</a>
+        </div>
+      </div>
+      
+      <!-- Project 8 -->
+      <div class="project-card" data-category="infrastructure">
+        <div class="project-image" style="background-image: url('images/walk.jpg');">
+          <div class="project-overlay">
+            <p>2021</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-category">Infrastructure</span>
+          <h3>Walkway Shade</h3>
+          <h4>Located at Goroka Town Center, EHP</h4>
+          <p>Client: Bird of Paradise</p>
+          <a href="#" class="cta-button secondary view-photos" data-project="8">View Photos</a>
+        </div>
+      </div>
+      
+      <!-- Project 9 -->
+      <div class="project-card" data-category="residential">
+        <div class="project-image" style="background-image: url('images/backyard.png');">
+          <div class="project-overlay">
+            <p>2021</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-category">Residential</span>
+          <h3>Perimeter Fencing</h3>
+          <h4>Located at P. O. Box Goroka, EHP</h4>
+          <p>Client: Daewon Trading LTD</p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
+        </div>
+      </div>
+      
+      <!-- Project 10 -->
+      <div class="project-card" data-category="residential">
+        <div class="project-image" style="background-image: url('images/hou.png');">
+          <div class="project-overlay">
+            <p> 2024</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-category">Residential</span>
+          <h3>2 & 1 Classroom</h3>
+          <h4>Located at Upegu Village, Unggai Bena - Lower Bena</h4>
+          <p>Client: Governor Of E.H.P (Hon. Simon SIA) </p>
+          <a href="#" class="cta-button secondary view-project">View Photo</a>
+        </div>
+      </div>
+
+      <!-- Project 11 -->
+      <div class="project-card" data-category="residential">
+        <div class="project-image" style="background-image: url('images/project11.jpg');">
+          <div class="project-overlay">
+            <p> 2024</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-category">Residential</span>
+          <h3>Fencing at Security Guard</h3>
+          <h4>Located at Bird of Paradise Hotel</h4>
+          <p>Price: K228,000.00 </p>
+          <a href="#" class="cta-button secondary view-photos" data-project="11">View Photos</a>
+        </div>
+      </div>
+
+      <!-- Project 12 -->
+      <div class="project-card" data-category="residential">
+        <div class="project-image" style="background-image: url('images/yellow.jpg');">
+          <div class="project-overlay">
+            <p>2024</p>
+          </div>
+        </div>
+        <div class="project-info">
+          <span class="project-category">Residential</span>
+          <h3>Yellow House</h3>
+          <h4>Located at North Goroka, EHP.</h4>
+          <p>Client: Mr. Peter Gare</p>
+          <a href="#" class="cta-button secondary view-photos" data-project="12">View Photos</a>
         </div>
       </div>
     </div>
+    
   </section>
 
-  <!-- Stats Section -->
-  <section class="stats-section">
-    <div class="stats-container">
-      <div class="stat-item">
-        <h3>15+</h3>
-        <p>Projects Completed</p>
-      </div>
-      <div class="stat-item">
-        <h3>15+</h3>
-        <p>Years Experience</p>
-      </div>
-      <div class="stat-item">
-        <h3>10+</h3>
-        <p>Expert Team Members</p>
-      </div>
-      <div class="stat-item">
-        <h3>95%</h3>
-        <p>Client Satisfaction</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <!-- <section class="section section-dark">
-    <div class="section-title">
-      <h2>Have a Project in Mind?</h2>
-      <p>Let's discuss your construction needs and how we can help bring your vision to life</p>
-    </div>
-    <div style="text-align: center;">
-      <a href="contact.html" class="cta-button">Start Your Project</a>
-    </div>
-  </section> -->
-
-  <!-- Modal -->
+  <!-- Single Image Modal -->
   <div class="modal" id="imgModal">
     <div class="modal-content">
       <button class="close-btn" id="closeModal">&times;</button>
       <img src="" alt="Project Image" id="modalImage">
+    </div>
+  </div>
+
+  <!-- Gallery Modal -->
+  <div class="gallery-modal" id="galleryModal">
+    <div class="gallery-content">
+      <button class="close-btn" id="closeGallery">&times;</button>
+      <img src="" alt="Project Image" class="gallery-main-image" id="galleryImage">
+      <div class="gallery-nav">
+        <button class="gallery-btn" id="prevBtn">&lt;</button>
+        <div class="gallery-counter" id="galleryCounter"></div>
+        <button class="gallery-btn" id="nextBtn">&gt;</button>
+      </div>
+      <div class="gallery-thumbnails" id="galleryThumbnails">
+        <!-- Thumbnails will be added dynamically -->
+      </div>
     </div>
   </div>
 
@@ -851,12 +999,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
-      <!-- <div class="social-icons">
+      <p>&copy; 2025 GB Construction Company Limited. All rights reserved.</p>
+      <div class="social-icons">
         <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
         <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-      </div> -->
+      </div>
     </div>
   </footer>
   <script>
@@ -915,7 +1063,7 @@
       });
     });
 
-    // Modal for Project Images
+    // Single Image Modal
     const modal = document.getElementById('imgModal');
     const modalImg = document.getElementById('modalImage');
     const closeBtn = document.getElementById('closeModal');
@@ -939,6 +1087,131 @@
     
     modal.addEventListener('click', e => { 
       if (e.target === modal) modal.style.display = 'none'; 
+    });
+
+    // Gallery Modal for Project Images
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryImage = document.getElementById('galleryImage');
+    const galleryThumbnails = document.getElementById('galleryThumbnails');
+    const closeGalleryBtn = document.getElementById('closeGallery');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const galleryCounter = document.getElementById('galleryCounter');
+    const viewPhotosButtons = document.querySelectorAll('.view-photos');
+    
+    // Define project images for projects with multiple photos
+    const projectImages = {
+      1: [
+        'images/project1.1.jpg',
+        'images/project1.2.jpg'
+      ],
+      7: [
+        'images/project7.1.png'
+      ],
+      8: [
+        'images/walk.jpg',
+        'images/walk1.jpg',
+        'images/walk2.jpg'
+      ],
+      11: [
+        'images/project11.jpg',
+        'images/project11.2.jpg',
+        'images/project11.3.jpg',
+        'images/project11.4.jpg',
+        'images/project11.5.jpg'
+      ],
+      12: [
+        'images/yellow.jpg',
+        'images/yellow2.jpg'
+      ]
+    };
+    
+    let currentProject = null;
+    let currentImageIndex = 0;
+    
+    // Function to open gallery with specific project images
+    function openGallery(projectId) {
+      currentProject = projectId;
+      currentImageIndex = 0;
+      
+      const images = projectImages[projectId] || [];
+      
+      if (images.length === 0) return;
+      
+      // Set the main image
+      galleryImage.src = images[0];
+      
+      // Create thumbnails
+      galleryThumbnails.innerHTML = '';
+      images.forEach((img, index) => {
+        const thumbnail = document.createElement('img');
+        thumbnail.src = img;
+        thumbnail.alt = `Project ${projectId} Image ${index + 1}`;
+        thumbnail.classList.add('gallery-thumbnail');
+        if (index === 0) thumbnail.classList.add('active');
+        
+        thumbnail.addEventListener('click', () => {
+          currentImageIndex = index;
+          updateGallery();
+        });
+        
+        galleryThumbnails.appendChild(thumbnail);
+      });
+      
+      // Update counter
+      updateCounter();
+      
+      // Show modal
+      galleryModal.style.display = 'flex';
+    }
+    
+    // Function to update gallery display
+    function updateGallery() {
+      const images = projectImages[currentProject] || [];
+      galleryImage.src = images[currentImageIndex];
+      
+      // Update active thumbnail
+      const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+      thumbnails.forEach((thumb, index) => {
+        thumb.classList.toggle('active', index === currentImageIndex);
+      });
+      
+      updateCounter();
+    }
+    
+    // Function to update image counter
+    function updateCounter() {
+      const images = projectImages[currentProject] || [];
+      galleryCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+    }
+    
+    // Event listeners for gallery navigation
+    prevBtn.addEventListener('click', () => {
+      const images = projectImages[currentProject] || [];
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateGallery();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      const images = projectImages[currentProject] || [];
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateGallery();
+    });
+    
+    // Event listeners for view photos buttons
+    viewPhotosButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectId = button.getAttribute('data-project');
+        openGallery(projectId);
+      });
+    });
+    
+    // Close gallery
+    closeGalleryBtn.addEventListener('click', () => galleryModal.style.display = 'none');
+    
+    galleryModal.addEventListener('click', e => { 
+      if (e.target === galleryModal) galleryModal.style.display = 'none'; 
     });
   </script>
 </body>

@@ -16,6 +16,8 @@
       --dark: #212529;
       --gray: #6c757d;
       --transition: all 0.3s ease;
+      --shadow: 0 5px 15px rgba(0,0,0,0.08);
+      --radius: 8px;
     }
     
     * { 
@@ -133,36 +135,36 @@
       cursor: pointer;
     }
 
-    /* front Section */
-    .front {
+    /* Hero Section */
+    .hero {
       background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/PAP.jpg') no-repeat center center/cover;
       height: 60vh;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-top: 1rem;
-      padding-bottom: .1rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
       margin-top: 85px;
       color: white;
       text-align: center;
     }
     
-    .front-content {
+    .hero-content {
       max-width: 900px;
       width: 100%;
       padding: 2rem;
       z-index: 2;
     }
     
-    .front h1 {
+    .hero h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     
-    .front p {
+    .hero p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
       font-weight: 300;
@@ -228,18 +230,14 @@
       color: rgba(255,255,255,0.8);
     }
 
-    /* About Content */
-    .about-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: justify;
-    }
-    
-    .about-content {
+    /* NEW: About Intro */
+    .about-intro {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 5rem;
     }
     
     .about-text h2 {
@@ -251,55 +249,156 @@
     .about-text p { 
       margin-bottom: 1.5rem; 
       color: var(--gray);
+      text-align: justify;
     }
     
-    .about-highlights {
-      background: var(--light);
-      padding: 2.5rem;
-      border-radius: 8px;
-      border-left: 4px solid var(--secondary);
-    }
-    
-    .about-highlights h3 { 
-      margin-bottom: 1.5rem; 
+    .about-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--primary);
-    }
-    
-    .highlight-item {
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
       position: relative;
-      color: var(--dark);
     }
     
-    .highlight-item:before {
-      content: "✓";
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 2rem;
+    }
+    
+    .about-image::before {
+      content: '';
       position: absolute;
+      top: 0;
       left: 0;
-      font-weight: bold;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(26, 82, 118, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
+      z-index: 1;
+    }
+
+    /* NEW: Feature Cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+      border-top: 4px solid var(--secondary);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
       color: var(--secondary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+      color: var(--gray);
+      text-align: justify;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--primary);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+    
+    .stat-item {
+      padding: 1.5rem;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-size: 1.1rem;
+      font-weight: 600;
     }
 
     /* Mission & Values */
     .mission-values {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 3rem;
-      text-align: justify;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     
-    .mission-card, .values-card {
+    .mission-card, .values-card, .vision-card {
       background: white;
       padding: 2.5rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
     
-    .mission-card h3, .values-card h3 {
+    .mission-card::before, .values-card::before, .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--secondary);
+    }
+    
+    /* .mission-card:hover, .values-card:hover, .vision-card:hover {
+      transform: translateY(-5px);
+    }
+     */
+    .mission-card h3, .values-card h3, .vision-card h3 {
       color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .mission-card h3 i {
+      color: var(--secondary);
+    }
+    
+    .mission-card p, .vision-card p {
+      text-align: justify;
     }
     
     .values-grid {
@@ -319,6 +418,10 @@
       color: var(--primary);
       margin-bottom: 0.5rem;
     }
+    
+    .value-item p {
+      text-align: justify;
+    }
 
     /* Team Section */
     .team-grid {
@@ -331,22 +434,51 @@
     
     .team-card {
       background: white;
-      border-radius: 8px;
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow);
       transition: var(--transition);
       text-align: center;
     }
     
-    .team-card:hover {
+    /* .team-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    } */
+    
+    .team-img-container {
+      position: relative;
+      overflow: hidden;
+      height: 250px;
     }
     
     .team-img {
       width: 100%;
-      height: 250px;
+      height: 100%;
       object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .team-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .team-card:hover .team-img-overlay {
+      opacity: 1;
+    }
+    
+    .team-card:hover .team-img {
+      transform: scale(1.1);
     }
     
     .team-info {
@@ -401,8 +533,8 @@
       position: relative;
       background: white;
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       text-align: center;
     }
     
@@ -567,6 +699,7 @@
       background: var(--dark);
       color: white;
       padding: 3rem 1rem 1rem;
+      margin-top: auto;
     }
     
     .footer-content {
@@ -633,16 +766,71 @@
       transform: translateY(-3px);
     }
 
+    /* NEW: Commitment Section */
+    .commitment-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .commitment-text h2 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .commitment-text p {
+      text-align: justify;
+    }
+    
+    .commitment-highlights {
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .commitment-highlights h3 { 
+      margin-bottom: 1.5rem; 
+      color: var(--primary);
+    }
+    
+    .highlight-item {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--dark);
+      text-align: justify;
+    }
+    
+    .highlight-item:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: var(--secondary);
+    }
+
     /* Responsive Styles */
     @media (max-width: 992px) {
-      .about-content,
+      .about-intro,
+      .commitment-section,
+      .features-grid,
       .mission-values {
         grid-template-columns: 1fr;
         gap: 3rem;
       }
       
-      .front h1 {
+      .hero h1 {
         font-size: 2.5rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
     
@@ -684,16 +872,16 @@
         display: block;
       }
       
-      .front {
+      .hero {
         height: 50vh;
         margin-top: 60px;
       }
       
-      .front h1 {
+      .hero h1 {
         font-size: 2rem;
       }
       
-      .front p {
+      .hero p {
         font-size: 1rem;
       }
       
@@ -707,19 +895,28 @@
       
       .mission-card, 
       .values-card,
+      .vision-card,
       .certificate-slider {
         padding: 1.5rem;
+      }
+      
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
       }
     }
     
     @media (max-width: 576px) {
-      .front h1 {
+      .hero h1 {
         font-size: 1.8rem;
       }
       
       .companyName {
         font-size: 1.1rem;
-      }
+      } 
       
       .logo img {
         height: 40px;
@@ -728,6 +925,15 @@
       .team-grid {
         grid-template-columns: 1fr;
       }
+      
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bpn {
+      justify-content: center;
+      display: flex;
     }
   </style>
 </head>
@@ -750,66 +956,140 @@
     </nav>
   </header>
 
-  <!-- front Section -->
-  <section class="front">
-    <div class="front-content">
-      <h1>About GB Construction Company Limited</h1>
-      <p>Company Background</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Company Background</h1>
+      <p>Building dreams with passion and precision since 2020</p>
     </div>
   </section>
 
-  <!-- Overview Section -->
-  <section class="section section-light">
-    <div class="about-container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2>Company Overview</h2>
-          <p>
-            GB Construction Company is an organization that takes on the role as Main Contractor 
-            for Small to Large size projects and performs project management services to coordinates 
-            specialist trades for industrial / commercial projects. We also provide design inputs and 
-            engineering solutions as a value-add services to our clients.
-          </p>
-          <p>
-            Our objective is to provide our clients with an "I am assured" experience when we are 
-            chosen to execute their projects. Our emphasis on clear communication and follow-through 
-            procedures ensures that client's objective is our top priority in the planning and 
-            execution of all our processes. This is what we call "we build and connect".
-          </p>
-          <!-- <a href="contact.html" class="cta-button">Get In Touch</a> -->
-        </div>
-        <div class="about-highlights">
-          <h3>Our Commitment</h3>
-          <div class="highlight-item">Highest regard to Quality, Honesty, Integrity and Customer Satisfaction</div>
-          <div class="highlight-item">Cooperation with the Government of Papua New Guinea</div>
-          <div class="highlight-item">Complete projects on time with superb quality at competitive prices</div>
-          <div class="highlight-item">Utilization of modern technologies and best practices</div>
-          <div class="highlight-item">Development of client ideas and projects in an environment of trust</div>
-        </div>
+  <!-- About Intro Section -->
+  <section class="section section-white">
+    <div class="about-intro">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>
+          Founded in 2020, GB Construction Company Limited is not a big name, but has a big heart and passion 
+          in building  every clients' dreams and goals. We specializing in commercial, residential, and
+          infrastructure projects, dedicated to transforming ideas into solid, high-quality structures 
+          through our expertise in design and build, renovation, civil works, electrical, plumbing, and
+          masonry services. 
+        </p>
+        <p>
+         At GB Construction, our clients' satisfaction is our top priority.
+        </p>
+        <!-- <p>
+          Our expertise spans design and build, renovation, civil works, 
+          electrical, plumbing, and masonry services. At GB Construction, our clients' satisfaction is our top priority.
+        </p> -->
+        <!-- <a href="contact.html" class="cta-button">Get In Touch</a> -->
       </div>
+      <div class="about-image">
+        <img src="images/logo.png" alt="GB Construction Excellence">
+      </div>
+    </div>
 
-      <!-- Mission & Values -->
-      <div class="mission-values">
-        <div class="mission-card">
-          <h3>Our Mission</h3>
-          <p>Our mission is to serve our customers with excellence and exceed their expectations through innovative construction solutions, superior craftsmanship, and unwavering commitment to quality.</p>
-          <p>We strive to build lasting relationships with our clients by delivering projects on time and within budget while maintaining the highest standards of safety and professionalism.</p>
+    <!-- Features Grid -->
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-hammer"></i>
         </div>
-        <div class="values-card">
-          <h3>Our Values</h3>
-          <div class="values-grid">
-            <div class="value-item">
-              <h4>Truth and Honesty</h4>
-              <p>We act with authenticity and integrity, true to ourselves, customers, partners, and employees. These values ensure long-term success and resilience.</p>
-            </div>
-            <div class="value-item">
-              <h4>Trust and Empowerment</h4>
-              <p>We honor trust in people, partners, and employees, empowering management and executives to build solid business and strong relationships.</p>
-            </div>
-            <div class="value-item">
-              <h4>Commitment and Responsibility</h4>
-              <p>Since inception, we commit to our country, community, and business. Dedicated people strengthen our growth daily.</p>
-            </div>
+        <h3>Quality Craftsmanship</h3>
+        <p>We take pride in delivering exceptional quality in every project we undertake.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Timely Delivery</h3>
+        <p>We complete projects on schedule without compromising quality standards.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>Client Partnership</h3>
+        <p>We build lasting relationships based on trust, transparency and collaboration.</p>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <!-- <div class="stats-section">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Satisfied Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Quality Commitment</div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- Commitment Section -->
+  <section class="section section-light">
+    <div class="commitment-section">
+      <div class="commitment-highlights">
+        <h3>Our Commitment</h3>
+        <div class="highlight-item">Highest regard to Quality, Honesty, Integrity and Customer Satisfaction</div>
+        <div class="highlight-item">Cooperation with the Government of Papua New Guinea</div>
+        <div class="highlight-item">Complete projects on time with superb quality at competitive prices</div>
+        <div class="highlight-item">Utilization of modern technologies and best practices</div>
+        <div class="highlight-item">Development of client ideas and projects in an environment of trust</div>
+      </div>
+      <div class="commitment-text">
+        <h2>Tagline</h2>
+        <p>
+          “Your Vision, Our Passion - where your vision becomes reality through our passion to build"
+        </p>
+        <!-- <p>
+         At GB Construction, our clients' satisfaction is our top priority.
+        </p> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Values Section -->
+  <section class="section section-white">
+    <div class="section-title">
+      <h2>Our Vision & Values</h2>
+      <p>Guiding principles that define who we are and how we work</p>
+    </div>
+    <div class="mission-values">
+      <div class="mission-card">
+        <h3><i class="fas fa-bullseye"></i> Mission</h3>
+        <p>To provide top-quality construction solutions, helping our clients achieve their goals through efficient and reliable service.</p>
+      </div>
+      <div class="vision-card">
+        <h3><i class="fas fa-eye"></i> Vision</h3>
+        <p>To be recognized as one of the most trusted construction companies that build with efficiency, reliability and professionalism.</p>
+      </div>
+      <div class="values-card">
+        <h3><i class="fas fa-gem"></i> Our Values</h3>
+        <div class="values-grid">
+          <div class="value-item">
+            <h4>Truth and Honesty</h4>
+            <p>We act with authenticity and integrity, true to ourselves, customers, partners, and employees.</p>
+          </div>
+          <div class="value-item">
+            <h4>Trust and Empowerment</h4>
+            <p>We honor trust in people, partners, and employees, empowering management to build strong relationships.</p>
+          </div>
+          <div class="value-item">
+            <h4>Commitment and Responsibility</h4>
+            <p>We commit to our country, community, and business. Dedicated people strengthen our growth daily.</p>
           </div>
         </div>
       </div>
@@ -817,15 +1097,20 @@
   </section>
 
   <!-- Team Section -->
-  <section class="section section-white">
+  <section class="section section-light">
     <div class="section-title">
-      <h2>Our Team</h2>
-      <!-- <p>Meet the dedicated professionals behind GB Construction</p> -->
+      <h2>Leadership Team</h2>
+      <p>Meet the dedicated professionals behind GB Construction</p>
     </div>
     <div class="team-grid">
       <!-- Noel -->
       <div class="team-card">
-        <img src="images/dp.jpg" alt="Noel P. Baron" class="team-img">
+        <div class="team-img-container">
+          <img src="images/imgg.png" alt="Noel P. Baron" class="team-img">
+          <div class="team-img-overlay">
+            <button class="view-btn" data-img="images/noel.jpg">View Photo</button>
+          </div>
+        </div>
         <div class="team-info">
           <h3>MR. NOEL P. BARON</h3>
           <span class="position">GENERAL MANAGER</span>
@@ -848,7 +1133,12 @@
 
       <!-- Mickey -->
       <div class="team-card">
-        <img src="images/dp.jpg" alt="Mickey Kauga" class="team-img">
+        <div class="team-img-container">
+          <img src="images/imgg.png" alt="Mickey Kauga" class="team-img">
+          <div class="team-img-overlay">
+            <button class="view-btn" data-img="images/mickey1.png">View Photo</button>
+          </div>
+        </div>
         <div class="team-info">
           <h3>MR. MICKEY KAUGA</h3>
           <span class="position">ADMIN MANAGER</span>
@@ -868,57 +1158,11 @@
           </div>
         </div>
       </div>
-
-      <!-- Ronnie -->
-      <div class="team-card">
-        <img src="images/dp.jpg" alt="Ronnie Andrade" class="team-img">
-        <div class="team-info">
-          <h3>MR. RONNIE ANDRADE</h3>
-          <span class="position">PROJECT MANAGER</span>
-          <div class="team-details">
-            <div class="team-detail">
-              <span class="detail-label">YEARS OF EXPERIENCE:</span>
-              <span class="detail-value">15 YEARS</span>
-            </div>
-            <div class="team-detail">
-              <span class="detail-label">EDUCATION:</span>
-              <span class="detail-value">PROJECT MANAGER</span>
-            </div>
-            <div class="team-detail">
-              <span class="detail-label">RELEVANT EXPERIENCE:</span>
-              <span class="detail-value">BUILDING CONSTRUCTION</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edwin -->
-      <div class="team-card">
-        <img src="images/dp.jpg" alt="Edwin Calimos" class="team-img">
-        <div class="team-info">
-          <h3>MR. EDWIN CALIMOSO</h3>
-          <span class="position">SITE SUPERVISOR</span>
-          <div class="team-details">
-            <div class="team-detail">
-              <span class="detail-label">YEARS OF EXPERIENCE:</span>
-              <span class="detail-value">10 YEARS</span>
-            </div>
-            <div class="team-detail">
-              <span class="detail-label">EDUCATION:</span>
-              <span class="detail-value">PROJECT SUPERVISOR</span>
-            </div>
-            <div class="team-detail">
-              <span class="detail-label">RELEVANT EXPERIENCE:</span>
-              <span class="detail-value">BUILDING CONSTRUCTION</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Certificates Section -->
-  <section class="section section-light">
+  <section class="section section-white">
     <div class="section-title">
       <h2>Our Certifications</h2>
       <p>Official documents that validate our expertise and compliance</p>
@@ -944,17 +1188,6 @@
           <button class="arrow-btn" id="nextSlide">&#8594;</button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="section section-dark">
-    <div class="section-title">
-      <h2>Ready to Work With Us?</h2>
-      <p>Let's discuss your construction needs and how we can help bring your vision to life</p>
-    </div>
-    <div style="text-align: center;">
-      <a href="contact.html" class="cta-button">Contact Us Today</a>
     </div>
   </section>
 
@@ -990,12 +1223,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 GB Construction Company Limited. All rights reserved.</p>
-      <!-- <div class="social-icons">
-        <a href="https://wa.me/67572177890" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:noelbaron63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.facebook.com/noel.baron.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-      </div> -->
+      <p>&copy; 2025 GB Construction Company Limited. All rights reserved.</p>
     </div>
   </footer>
 
@@ -1059,12 +1287,16 @@
     const rotateBtn = document.getElementById("rotateBtn");
     let rotation = 0;
 
+    function openModal(imgSrc) {
+      modal.style.display = "flex";
+      modalImg.src = imgSrc;
+      rotation = 0;
+      modalImg.style.transform = `rotate(${rotation}deg)`;
+    }
+
     document.querySelectorAll(".view-btn").forEach(btn => {
       btn.addEventListener("click", () => {
-        modal.style.display = "flex";
-        modalImg.src = btn.dataset.img;
-        rotation = 0;
-        modalImg.style.transform = `rotate(${rotation}deg)`;
+        openModal(btn.dataset.img);
       });
     });
 
